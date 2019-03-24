@@ -57,3 +57,10 @@ def execute_script(path, args):
     given args'''
     subprocess.Popen(path + ' ' + args)
 
+def install_package(package_name):
+    try:
+        from pip import main as pipmain
+    except ImportError:
+        from pip._internal import main as pipmain
+
+    pipmain(['install', package_name])
