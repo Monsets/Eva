@@ -50,6 +50,8 @@ def get_script_path(command, modules):
         if command in module.commands.keys():
             return module.commands[command]
 
+    return None
+
 def execute_script(path, args):
     '''executes command's scripts with
     given args'''
