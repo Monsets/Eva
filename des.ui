@@ -41,15 +41,6 @@
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
-       <widget class="QWidget" name="verticalLayoutWidget_2">
-        <property name="geometry">
-         <rect>
-          <x>-10</x>
-          <y>0</y>
-          <width>561</width>
-          <height>541</height>
-         </rect>
-        </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
@@ -199,17 +190,9 @@
          </item>
         </layout>
        </widget>
-      </widget>
+     
       <widget class="QWidget" name="settings_notification_page">
-       <widget class="QWidget" name="gridLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>-1</x>
-          <y>-3</y>
-          <width>731</width>
-          <height>611</height>
-         </rect>
-        </property>
+  
         <layout class="QGridLayout" name="gridLayout_3">
          <property name="leftMargin">
           <number>40</number>
@@ -259,7 +242,7 @@
          </item>
         </layout>
        </widget>
-      </widget>
+   
       <widget class="QWidget" name="settings_interface_page"/>
       <widget class="QWidget" name="about_app">
        <widget class="QLabel" name="label_7">
