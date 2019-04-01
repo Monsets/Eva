@@ -1,6 +1,5 @@
 import pyautogui as pgui
-import subprocess
+import subprocess, time
 
-import time
 time.sleep(5)
 pgui.hotkey('ctrl','shift' ,'w')
