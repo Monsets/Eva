@@ -1,6 +1,5 @@
 import pyautogui as pgui
 import subprocess
-
 import time
 
 proc = subprocess.call('firefox', shell = True)
