@@ -9,7 +9,16 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  # Это нужно для инициализации нашего дизайна
         self.ui.settings_button_widget.hide()
+        self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
+
+    def init_menu_buttons(self):
+        buttons = [self.ui.Button_History,
+        self.ui.Button_Settings, self.ui.Button_Settings_Micro,
+        self.ui.Button_Settings_Notify, self.ui.Button_Modules,
+        self.ui.Button_Settings_Interface, self.ui.Button_About ]
+
+        return buttons
 
     def bound_menu_buttons(self):
         self.ui.Button_History.clicked.connect(self.display_history_page)
@@ -20,26 +29,42 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.Button_Settings_Interface.clicked.connect(self.display_settings_interface)
         self.ui.Button_About.clicked.connect(self.display_about_page)
 
+    def set_button_colors(self, clicked_button):
+        #sets buttons bakground color to app's standart
+        for button in self.menu_buttons:
+            button.setStyleSheet("background-color: rgb(65,105,225); color: white;border: none;font:  17px ;text-align:left;")
+        #highlight clicked button
+        clicked_button.setStyleSheet("background-color: rgb(30,144,255); color: white;border: none;font:  17px ;text-align:left;")
+
     def display_settings(self):
+        self.set_button_colors(self.ui.Button_Settings)
         self.ui.settings_button_widget.show()
 
     def display_modules_page(self):
+        self.set_button_colors(self.ui.Button_Modules)
+        #hide setting's buttons
         self.ui.settings_button_widget.hide()
+        #change page at the right part of app
         self.ui.stackedWidget.setCurrentIndex(1)
 
     def display_history_page(self):
+        self.set_button_colors(self.ui.Button_History)
         self.ui.settings_button_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(0)
 
     def display_settings_micro(self):
+        self.set_button_colors(self.ui.Button_Settings_Micro)
         self.ui.stackedWidget.setCurrentIndex(2)
 
     def display_settings_notify(self):
+        self.set_button_colors(self.ui.Button_Settings_Notify)
         self.ui.stackedWidget.setCurrentIndex(3)
 
     def display_settings_interface(self):
+        self.set_button_colors(self.ui.Button_Settings_Interface)
         self.ui.stackedWidget.setCurrentIndex(4)
 
     def display_about_page(self):
+        self.set_button_colors(self.ui.Button_About)
         self.ui.settings_button_widget.hide()
         self.ui.stackedWidget.setCurrentIndex(5)
