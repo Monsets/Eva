@@ -55,16 +55,16 @@ if __name__ == '__main__':
 
     '''Creating an object for an activation word'''
     activacion = LiveSpeech(
-    verbose=True,
-    sampling_rate=16000,
-    buffer_size=2048,
-    no_search=False,
-    full_utt=False,
-    hmm=os.path.join(model_path, 'zero_ru.cd_cont_4000'),
-    lm=False,
-    jsgf=os.path.join(model_path, 'TEST/activ.jsgf'),
-    dic=os.path.join(model_path, 'TEST/my_dictionary_out')
-)
+        verbose=True,
+        sampling_rate=16000,
+        buffer_size=2048,
+        no_search=False,
+        full_utt=False,
+        hmm=os.path.join(model_path, 'zero_ru.cd_cont_4000'),
+        lm=False,
+        jsgf=os.path.join(model_path, 'TEST/activ.jsgf'),
+        dic=os.path.join(model_path, 'TEST/my_dictionary_out')
+    )
 
     while True:
         for phrase in activacion:
