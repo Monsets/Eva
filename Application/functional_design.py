@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
+import os
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -11,6 +12,7 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
+        self.init_modules_table("./Modules")
 
     def init_menu_buttons(self):
         buttons = [self.ui.Button_History,
@@ -19,6 +21,13 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.Button_Settings_Interface, self.ui.Button_About ]
 
         return buttons
+
+    def init_modules_table(self, path):
+        #get modules names and fill with that module
+        dirs = [dir for dir in os.listdir(path) if os.path.isdir(os.path.join(path, dir))]
+        for dir in dirs:
+            self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(dir))
+        self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem("Информация о модуле не найдена!"))
 
     def bound_menu_buttons(self):
         self.ui.Button_History.clicked.connect(self.display_history_page)
