@@ -1,11 +1,9 @@
+import os
+
 from PyQt5 import QtWidgets, QtCore
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
-<<<<<<< HEAD
 #from Application.Settingsr.settingsEva import settingsEva
 from PyQt5.QtCore import QSettings
-=======
-import os
->>>>>>> master
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -14,14 +12,21 @@ class EvaApp(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  # Это нужно для инициализации нашего дизайна
+
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
-<<<<<<< HEAD
+
+        #временное решение
+        self.init_text_constants()
+
         self.save_slider(50)
-=======
-        self.init_modules_table("./Modules")
->>>>>>> master
+
+        self.init_modules_table(self.modules_path)
+
+    def init_text_constants(self):
+        self.modules_path = "./Modules"
+        self.no_module_info = "Информация о модуле не найдена!"
 
     def init_menu_buttons(self):
         buttons = [self.ui.Button_History,
@@ -30,7 +35,6 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.Button_Settings_Interface, self.ui.Button_About ]
         return buttons
 
-<<<<<<< HEAD
         '''-------Сохранение настроек микшера громкости микрофона-------'''
     def save_slider(self,value):
         settings = QSettings()
@@ -46,14 +50,19 @@ class EvaApp(QtWidgets.QMainWindow):
     def save_slider_micro(self,value):
         settings = QSettings()
         settings.setValue("slider_micro",value)
-=======
+
+
+    '''Module page events'''
+
     def init_modules_table(self, path):
         #get modules names and fill with that module
         dirs = [dir for dir in os.listdir(path) if os.path.isdir(os.path.join(path, dir))]
         for dir in dirs:
             self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(dir))
-        self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem("Информация о модуле не найдена!"))
->>>>>>> master
+        self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem(self.no_module_info))
+
+
+    '''Buttons events'''
 
     def bound_menu_buttons(self):
         self.ui.Button_History.clicked.connect(self.display_history_page)
