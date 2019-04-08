@@ -5,9 +5,8 @@
 # Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import QSettings
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -288,7 +287,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addItem(spacerItem2)
         self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -317,5 +315,3 @@ class Ui_MainWindow(object):
         self.Button_Settings_Notify.setText(_translate("MainWindow", "Уведомления"))
         self.Button_Modules.setText(_translate("MainWindow", "Модули"))
         self.Button_About.setText(_translate("MainWindow", "О приложении"))
-
-
