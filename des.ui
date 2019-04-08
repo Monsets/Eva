@@ -45,10 +45,89 @@
        <string notr="true">background-color: white;</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
-      <widget class="QWidget" name="history_page"/>
-      <widget class="QWidget" name="modules_page"/>
+      <widget class="QWidget" name="history_page">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="ScrollArea_History">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_8">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>542</width>
+             <height>522</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="modules_page">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item row="1" column="1">
+             <widget class="QListWidget" name="ListWidget_ModuleCommands"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QListWidget" name="ListWidget_ModuleNames"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Команда</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Модуль</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QScrollArea" name="ScrollArea_CommandInfo">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_7">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>542</width>
+             <height>259</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QWidget" name="gridWidget_2" native="true">
+          <layout class="QGridLayout" name="gridLayout_8"/>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="setting_micro_page">
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
@@ -292,7 +371,7 @@
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">border-radius: 5px;</string>
+           <string notr="true">border-radius: 25px;</string>
           </property>
           <property name="maximum">
            <number>1</number>
@@ -306,19 +385,70 @@
       </widget>
       <widget class="QWidget" name="settings_interface_page">
        <layout class="QVBoxLayout" name="settings_interface_page_layout">
+        <property name="spacing">
+         <number>20</number>
+        </property>
         <item>
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Размер шрифта</string>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-         </widget>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
-         <widget class="QSlider" name="horizontalSlider">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="spacing">
+           <number>10</number>
           </property>
-         </widget>
+          <property name="bottomMargin">
+           <number>60</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Размер шрифта</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="horizontalSlider">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -327,7 +457,7 @@
         <item>
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Здесь может быть ваша реклама. (8-800-555-35-35)</string>
           </property>
          </widget>
         </item>
@@ -336,7 +466,7 @@
      </widget>
     </item>
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0">
       <property name="spacing">
        <number>5</number>
       </property>
@@ -433,6 +563,16 @@
         </property>
         <property name="text">
          <string>Модули</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="styleSheet">
+         <string notr="true">c</string>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>

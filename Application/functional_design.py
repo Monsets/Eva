@@ -1,5 +1,11 @@
 from PyQt5 import QtWidgets, QtCore
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
+<<<<<<< HEAD
+#from Application.Settingsr.settingsEva import settingsEva
+from PyQt5.QtCore import QSettings
+=======
+import os
+>>>>>>> master
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -11,14 +17,43 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
+<<<<<<< HEAD
+        self.save_slider(50)
+=======
+        self.init_modules_table("./Modules")
+>>>>>>> master
 
     def init_menu_buttons(self):
         buttons = [self.ui.Button_History,
         self.ui.Button_Settings, self.ui.Button_Settings_Micro,
         self.ui.Button_Settings_Notify, self.ui.Button_Modules,
         self.ui.Button_Settings_Interface, self.ui.Button_About ]
-
         return buttons
+
+<<<<<<< HEAD
+        '''-------Сохранение настроек микшера громкости микрофона-------'''
+    def save_slider(self,value):
+        settings = QSettings()
+        slider_micro = self.ui.Slider_Micro_Volume
+        slider_value = settings.value("slider_micro")
+        if slider_value is None:
+            slider_micro.setValue(50)
+        else:
+            slider_micro.setValue(int(slider_value))
+        print(settings.value("slider_micro"))
+        slider_micro.valueChanged.connect(self.save_slider_micro)
+
+    def save_slider_micro(self,value):
+        settings = QSettings()
+        settings.setValue("slider_micro",value)
+=======
+    def init_modules_table(self, path):
+        #get modules names and fill with that module
+        dirs = [dir for dir in os.listdir(path) if os.path.isdir(os.path.join(path, dir))]
+        for dir in dirs:
+            self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(dir))
+        self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem("Информация о модуле не найдена!"))
+>>>>>>> master
 
     def bound_menu_buttons(self):
         self.ui.Button_History.clicked.connect(self.display_history_page)
@@ -55,6 +90,7 @@ class EvaApp(QtWidgets.QMainWindow):
     def display_settings_micro(self):
         self.set_button_colors(self.ui.Button_Settings_Micro)
         self.ui.stackedWidget.setCurrentIndex(2)
+
 
     def display_settings_notify(self):
         self.set_button_colors(self.ui.Button_Settings_Notify)
