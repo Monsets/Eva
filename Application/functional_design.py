@@ -2,17 +2,17 @@ import os
 
 from PyQt5 import QtWidgets, QtCore
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
-#from Application.Settingsr.settingsEva import settingsEva
 from PyQt5.QtCore import QSettings
 
 class EvaApp(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, mini_app):
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле generated_design.py
         super().__init__()
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)  # Это нужно для инициализации нашего дизайна
-
+        self.ui.setupUi(self)
+        self.mini_app = mini_app
+        #Button init
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
@@ -23,6 +23,17 @@ class EvaApp(QtWidgets.QMainWindow):
         self.save_slider(50)
 
         self.init_modules_table(self.modules_path)
+
+    def closeEvent(self, event):
+        """docstring"""
+        self.mini_app.show()
+
+        self.hide()
+        print("F")
+        event.ignore()
+
+    def show_mini_app(self):
+        print("F")
 
     def init_text_constants(self):
         self.modules_path = "./Modules"
