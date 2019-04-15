@@ -1,10 +1,10 @@
-import Check_internet
 import speech_recognition as sr
-from datetime import datetime
 import os
-from pocketsphinx import LiveSpeech, get_model_path
 import time
 
+from datetime import datetime
+from pocketsphinx import LiveSpeech, get_model_path
+from Application.Recognizer.check_internet import check_internet_connection
 
 
 def recognition_google():
@@ -35,6 +35,15 @@ def recognition_sphinx(speech):
 
     return 0
 
+def recognize():
+    internet_connection = check_internet_connection()
+
+    if (internet_connection):
+        text = recognition_google()
+    else:
+        text = recognition_sphinx(speech)
+
+    return text
 
 if __name__ == '__main__':
     model_path = get_model_path()
@@ -69,10 +78,5 @@ if __name__ == '__main__':
     while True:
         for phrase in activacion:
             if(str(phrase) == "открой терминал"):   # пока активационная фраза открой терминал
-                check_internet = Check_internet.Check_internet()
-                if (check_internet):
 
-                    recognition_google()
-
-                else:
-                    recognition_sphinx(speech)
+              recognize()

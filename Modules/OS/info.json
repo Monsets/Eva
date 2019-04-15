@@ -1,0 +1,11 @@
+{
+  "module_name": "FireFox",
+  "module_ver": "1.0",
+  "app_name": "firefox",
+  "commands": {
+    "команда":
+    {
+      "path": "newPage.py"
+    }
+  }
+}

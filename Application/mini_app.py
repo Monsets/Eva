@@ -1,14 +1,17 @@
 from PyQt5 import QtWidgets, QtCore
 from Application.mini_app_gen_design import Ui_mini_app
-
+from Application.Recognizer.text_to_command import recognize_and_execute
 
 class MiniApp(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, modules):
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле generated_design.py
         super().__init__()
         self.mini_ui = Ui_mini_app()
         self.mini_ui.setupUi(self)
+
+        self.modules = modules
+
         #save app's size for resizing
         self.standart_width = self.width()
         #get screen size to translate app to the right side
@@ -31,7 +34,8 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.Button_Recognize.setEnabled(False)
         #resize to show text
         self.translate_window_for_text()
-        self.mini_ui.Text_RecognizedCommand.setText("Распознанный текст")
+        command = recognize_and_execute(self.modules)
+        self.mini_ui.Text_RecognizedCommand.setText(command)
         #resize again after 2 seconds
         self.timer = QtCore.QTimer()
         self.timer.setSingleShot(True)

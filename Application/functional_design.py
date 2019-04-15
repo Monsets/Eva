@@ -1,27 +1,29 @@
 import os
 
 from PyQt5 import QtWidgets, QtCore
-from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
 from PyQt5.QtCore import QSettings
+from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
+from Application.modules import init_modules
 
 class EvaApp(QtWidgets.QMainWindow):
-    def __init__(self, mini_app):
+    def __init__(self, mini_app, modules):
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле generated_design.py
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.mini_app = mini_app
+        #временное решение
+        self.init_text_constants()
+        #Modules
+        self.modules = modules
         #Button init
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
         self.bound_menu_buttons()
 
-        #временное решение
-        self.init_text_constants()
-
         self.save_slider(50)
-
+        #Fill in module's page table
         self.init_modules_table(self.modules_path)
 
     def closeEvent(self, event):
@@ -31,9 +33,6 @@ class EvaApp(QtWidgets.QMainWindow):
         self.hide()
         print("F")
         event.ignore()
-
-    def show_mini_app(self):
-        print("F")
 
     def init_text_constants(self):
         self.modules_path = "./Modules"

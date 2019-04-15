@@ -1,7 +1,7 @@
 import socket
 
 
-def Check_internet():
+def check_internet_connection():
     host = "8.8.8.8"
     port = 53
     timeout = 3
