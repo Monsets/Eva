@@ -23,7 +23,7 @@ class EvaApp(QtWidgets.QMainWindow):
 
         self.save_slider(50)
         #Fill in module's page table
-        self.init_modules_table(self.modules_path)
+        self.init_modules_table()
 
     def closeEvent(self, event):
         """docstring"""
@@ -62,12 +62,14 @@ class EvaApp(QtWidgets.QMainWindow):
 
     '''Module page events'''
 
-    def init_modules_table(self, path):
-        #get modules names and fill with that module
-        dirs = [dir for dir in os.listdir(path) if os.path.isdir(os.path.join(path, dir))]
-        for dir in dirs:
-            self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(dir))
-        self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem(self.no_module_info))
+    def init_modules_table(self):
+        for module in self.modules:
+            self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(module.module_name))
+        self.write_module_command(self.modules[0])
+
+    def write_module_command(self, module):
+        for command in module.commands.keys():
+            self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem(command))
 
 
     '''Buttons events'''

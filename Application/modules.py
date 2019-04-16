@@ -19,7 +19,22 @@ class Module():
 
 class Modules():
     def __init__(self, modules):
-        self.modules = modules
+        self.__modules = modules
+        self.__current = 0
+
+    def __getitem__(self, key):
+        return self.__modules[key]
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.__current >= len(self.__modules):
+            self.__current = 0
+            raise StopIteration
+        else:
+            self.__current += 1
+            return self.__modules[self.__current - 1]
 
     def __get_active_windows(self):
         '''Obtain list of active windows
@@ -42,7 +57,7 @@ class Modules():
         return window_names
 
     def __find_module(self, window_name):
-        for module in self.modules:
+        for module in self.__modules:
             if window_name == module.app_name:
                 return module
 
