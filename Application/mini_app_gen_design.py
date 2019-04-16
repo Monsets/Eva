@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+#12
 class Ui_mini_app(object):
     def setupUi(self, mini_app):
         mini_app.setObjectName("mini_app")
