@@ -10,10 +10,11 @@ gi.require_version('Wnck', '3.0')
 from gi.repository import Gtk, Wnck
 
 class Module():
-    def __init__(self, module_name, module_ver, app_name, commands):
+    def __init__(self, module_name, module_ver, app_name, commands, module_path):
         self.module_name = module_name
         self.module_ver = module_ver
         self.app_name = app_name
+        self.module_path = module_path
         self.commands = commands
 
 class Modules():
@@ -49,7 +50,7 @@ class Modules():
 
     def __command_in_module(self, command, module):
         if command in module.commands.keys():
-            return command
+            return module.commands[command]
         return None
 
     def __parse_command(self, command, module_command):
@@ -71,7 +72,8 @@ class Modules():
                 continue
 
             args = self.__parse_command(command, module_command)
-            return module_command['path'], args
+
+            return os.path.join(module.module_path, module_command['path']), args
 
 
         return None
@@ -79,7 +81,9 @@ class Modules():
     def execute_script(self, path, args):
         '''executes command's scripts with
         given args'''
-        subprocess.Popen(path + ' ' + args)
+        print(os.path.dirname(os.path.abspath(__file__)))
+        print("DEBUG: path to script: {} args: {}".format(path, args))
+        subprocess.Popen([path, args])
 
 def install_package(package_name):
     try:
@@ -103,7 +107,8 @@ def init_modules(path_to_modules):
             if __is_json(file):
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
-                module = Module(data['module_name'], data['module_ver'], data['app_name'], data['commands'])
+                print(data, dirpath)
+                module = Module(data['module_name'], data['module_ver'], data['app_name'], data['commands'], dirpath)
                 mdls.append(module)
 
     modules = Modules(mdls)

@@ -10,7 +10,7 @@ from Application.Recognizer.check_internet import check_internet_connection
 def recognition_google():
     '''We get the command and save file'''
     date = datetime.now()
-    file_name = 'audio/' +  str(date)[:str(date).index('.')].replace(':',"-") + '.wav'  # 'audio/' заменить на каталог сохранения
+    file_name = '../../History' +  str(date)[:str(date).index('.')].replace(':',"-") + '.wav'  # 'audio/' заменить на каталог сохранения
     r = sr.Recognizer()
     mic = sr.Microphone()
 
