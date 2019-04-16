@@ -3,6 +3,7 @@ import os
 from PyQt5 import QtWidgets, QtCore
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
 from PyQt5.QtCore import QSettings
+from Application.settingsEva import SettingsEva
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self, mini_app):
@@ -12,6 +13,7 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.mini_app = mini_app
+        self.settingsEva = SettingsEva()
         #Button init
         self.ui.settings_button_widget.hide()
         self.menu_buttons = self.init_menu_buttons()
@@ -20,20 +22,31 @@ class EvaApp(QtWidgets.QMainWindow):
         #временное решение
         self.init_text_constants()
 
-        self.save_slider(50)
+        #Сохранение значения слайдера громкости микрофона
+        self.settingsEva.slider_micro(self.ui.Slider_Micro_Volume,50)
+        #Сохранение состояния чекбокса "Горячая клавиша"
+        self.settingsEva.CheckBox_HotKey(self.ui.CheckBox_HotKey)
+        #Сохранение состояния чекбокса "Ключевое слово"
+        self.settingsEva.CheckBox_KeyWork(self.ui.CheckBox_KeyWork)
+        #Сохранение значения слайдера размера шрифта
+        self.settingsEva.slider_font(self.ui.horizontalSlider,50)
+        #Сохранение состояния чекбокса "Включить вывод текста на экран"
+        self.settingsEva.ToggleSlider_TextNotify(self.ui.ToggleSlider_TextNotify,1)
+        #Сохранение состояния чекбокса "Включить звуковое оповещение"
+        self.settingsEva.ToggleSlider_SoundNotify(self.ui.ToggleSlider_SoundNotify,1)
 
         self.init_modules_table(self.modules_path)
 
-    def closeEvent(self, event):
+    #def closeEvent(self, event):
         """docstring"""
-        self.mini_app.show()
+    #    self.mini_app.show()
 
-        self.hide()
-        print("F")
-        event.ignore()
+    #    self.hide()
+    #    print("F")
+    #    event.ignore()
 
-    def show_mini_app(self):
-        print("F")
+    #def show_mini_app(self):
+    #    print("F")
 
     def init_text_constants(self):
         self.modules_path = "./Modules"
@@ -45,22 +58,6 @@ class EvaApp(QtWidgets.QMainWindow):
         self.ui.Button_Settings_Notify, self.ui.Button_Modules,
         self.ui.Button_Settings_Interface, self.ui.Button_About ]
         return buttons
-
-        '''-------Сохранение настроек микшера громкости микрофона-------'''
-    def save_slider(self,value):
-        settings = QSettings()
-        slider_micro = self.ui.Slider_Micro_Volume
-        slider_value = settings.value("slider_micro")
-        if slider_value is None:
-            slider_micro.setValue(50)
-        else:
-            slider_micro.setValue(int(slider_value))
-        print(settings.value("slider_micro"))
-        slider_micro.valueChanged.connect(self.save_slider_micro)
-
-    def save_slider_micro(self,value):
-        settings = QSettings()
-        settings.setValue("slider_micro",value)
 
 
     '''Module page events'''
