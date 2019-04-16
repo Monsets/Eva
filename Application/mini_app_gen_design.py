@@ -8,7 +8,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_mini_app(object):
     def setupUi(self, mini_app):
         mini_app.setObjectName("mini_app")
