@@ -22,7 +22,7 @@ class EvaApp(QtWidgets.QMainWindow):
         self.bound_menu_buttons()
 
         self.save_slider(50)
-        #Fill in module's page table
+        #Fill in module's page tabl
         self.init_modules_table()
 
     def closeEvent(self, event):
