@@ -81,7 +81,6 @@ class Modules():
     def execute_script(self, path, args):
         '''executes command's scripts with
         given args'''
-        print(os.path.dirname(os.path.abspath(__file__)))
         print("DEBUG: path to script: {} args: {}".format(path, args))
         subprocess.Popen([path, args])
 
@@ -107,7 +106,6 @@ def init_modules(path_to_modules):
             if __is_json(file):
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
-                print(data, dirpath)
                 module = Module(data['module_name'], data['module_ver'], data['app_name'], data['commands'], dirpath)
                 mdls.append(module)
 

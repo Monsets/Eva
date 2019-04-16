@@ -3,7 +3,6 @@ import os
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QSettings
 from Application.generated_design import Ui_MainWindow # Это наш конвертированный файл дизайна
-from Application.modules import init_modules
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self, mini_app, modules):
@@ -31,7 +30,6 @@ class EvaApp(QtWidgets.QMainWindow):
         self.mini_app.show()
 
         self.hide()
-        print("F")
         event.ignore()
 
     def init_text_constants(self):
