@@ -5,7 +5,8 @@
   "commands": {
     "команда":
     {
-      "path": "newPage.py"
+      "path": "newPage.py",
+      "Инфа": "Здеcь может быть ваша реклама"
     }
   }
 }

@@ -14,29 +14,32 @@ class EvaApp(QtWidgets.QMainWindow):
         self.mini_app = mini_app
         #временное решение
         self.init_text_constants()
-        #Modules
+
+        self.init_navigation_buttons()
         self.modules = modules
-        #Button init
-        self.ui.settings_button_widget.hide()
-        self.menu_buttons = self.init_menu_buttons()
-        self.bound_menu_buttons()
 
         self.save_slider(50)
         #Fill in module's page tabl
         self.init_modules_table()
+
+    def init_navigation_buttons(self):
+        self.ui.settings_button_widget.hide()
+        self.menu_buttons = self.get_menu_buttons()
+        self.bound_menu_buttons()
+
 
     def closeEvent(self, event):
         """docstring"""
         self.mini_app.show()
 
         self.hide()
-        event.ignore()
+        #event.ignore()
 
     def init_text_constants(self):
         self.modules_path = "./Modules"
         self.no_module_info = "Информация о модуле не найдена!"
 
-    def init_menu_buttons(self):
+    def get_menu_buttons(self):
         buttons = [self.ui.Button_History,
         self.ui.Button_Settings, self.ui.Button_Settings_Micro,
         self.ui.Button_Settings_Notify, self.ui.Button_Modules,
@@ -63,14 +66,31 @@ class EvaApp(QtWidgets.QMainWindow):
     '''Module page events'''
 
     def init_modules_table(self):
+        #add modules to table
         for module in self.modules:
             self.ui.ListWidget_ModuleNames.addItem(QtWidgets.QListWidgetItem(module.module_name))
-        self.write_module_command(self.modules[0])
+        #click on item
+        self.ui.ListWidget_ModuleNames.itemClicked.connect(self.change_info_module)
+        self.ui.ListWidget_ModuleCommands.itemClicked.connect(self.change_info_command)
 
-    def write_module_command(self, module):
+    def change_info_module(self):
+        #clear table
+        self.ui.ListWidget_ModuleCommands.clear()
+        #chosen item
+        module = self.modules[self.ui.ListWidget_ModuleNames.currentIndex().row()]
+        #change commands table
         for command in module.commands.keys():
             self.ui.ListWidget_ModuleCommands.addItem(QtWidgets.QListWidgetItem(command))
 
+    def change_info_command(self):
+        module = self.modules[self.ui.ListWidget_ModuleNames.currentIndex().row()]
+        command = module.commands[list(module.commands.keys())[self.ui.ListWidget_ModuleCommands.currentIndex().row()]]
+        info = ''
+        for attr in command.keys():
+            if attr == 'path':
+                continue
+            info += attr + ' : ' + command[attr]
+        self.ui.Label_CommandInfo.setText(info)
 
     '''Buttons events'''
 

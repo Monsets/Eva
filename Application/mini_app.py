@@ -33,14 +33,14 @@ class MiniApp(QtWidgets.QMainWindow):
     def show_output(self):
         self.mini_ui.Button_Recognize.setEnabled(False)
         #resize to show text
-        self.translate_window_for_text()
         command = recognize_and_execute(self.modules)
+        self.translate_window_for_text()
         self.mini_ui.Text_RecognizedCommand.setText(command)
-        #resize again after 2 seconds
+        #resize again after 4 seconds
         self.timer = QtCore.QTimer()
         self.timer.setSingleShot(True)
         self.timer.timeout.connect(self.translate_window_to_start)
-        self.timer.start(2000)
+        self.timer.start(4000)
 
         self.mini_ui.Button_Recognize.setEnabled(True)
 
@@ -49,5 +49,5 @@ class MiniApp(QtWidgets.QMainWindow):
         #stay on top
         self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
         #no frame
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        #self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
 
