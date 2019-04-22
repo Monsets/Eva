@@ -103,7 +103,7 @@ class EvaApp(QtWidgets.QMainWindow):
         for attr in command.keys():
             if attr == "path":
                 continue
-            info += attr + " : " + command[attr]
+            info += attr + " : " + command[attr] + '\n'
         self.ui.Label_CommandInfo.setText(info)
 
     """Buttons events"""
