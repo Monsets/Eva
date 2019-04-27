@@ -1,0 +1,10 @@
+<History>
+	<id ID="testID">
+		<path>History/testID</path>
+		<text>texttest</text>
+		<command>"testCOmand"</command>
+		<similarity>20</similarity>
+		<system>Google</system>
+		<date>2019</date>
+	</id>
+<id ID="1"><text>1</text><command>1</command><similarity>1</similarity><system>1</system><date>1</date></id></History>
