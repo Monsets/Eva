@@ -57,6 +57,8 @@ class EvaApp(QtWidgets.QMainWindow):
         # Сохранение состояния чекбокса "Включить звуковое оповещение"
         self.settingsEva.ToggleSlider_SoundNotify(self.ui.ToggleSlider_SoundNotify, 1)
 
+        self.settingsEva.HotKey_Choosen(self.ui.HotKey_Choosen)
+
     def get_menu_buttons(self):
         buttons = [
             self.ui.Button_History,
@@ -103,7 +105,7 @@ class EvaApp(QtWidgets.QMainWindow):
         for attr in command.keys():
             if attr == "path":
                 continue
-            info += attr + " : " + command[attr] + '\n'
+            info += attr + " : " + command[attr] + "\n"
         self.ui.Label_CommandInfo.setText(info)
 
     """Buttons events"""
