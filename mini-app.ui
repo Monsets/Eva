@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: white;</string>
+  </property>
   <property name="dockNestingEnabled">
    <bool>false</bool>
   </property>
@@ -30,13 +33,23 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>30</y>
+      <y>9</y>
       <width>89</width>
-      <height>25</height>
+      <height>62</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
-     <string>?</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Downloads/200px-VCS_LOGO_EVA.png</normaloff>../../Downloads/200px-VCS_LOGO_EVA.png</iconset>
     </property>
    </widget>
    <widget class="QTextEdit" name="Text_RecognizedCommand">
@@ -47,6 +60,9 @@
       <width>207</width>
       <height>62</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: None;</string>
     </property>
    </widget>
   </widget>

@@ -64,7 +64,8 @@ class Modules():
         return None
 
     def __command_in_module(self, command, module):
-        if command in module.commands.keys():
+        keys = [x.lower() for x in module.commands.keys()]
+        if command in keys:
             return module.commands[command]
         return None
 
@@ -121,8 +122,14 @@ def init_modules(path_to_modules):
             if __is_json(file):
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
-                module = Module(data['module_name'], data['module_ver'], data['app_name'], data['commands'], dirpath)
+                #commands to lower case
+                commands = {}
+                for key, d in zip(data['commands'].keys(), data['commands'].values()):
+                    commands[key.lower()] = d
+                module = Module(data['module_name'], data['module_ver'], data['app_name'], commands, dirpath)
                 mdls.append(module)
+
+
 
     modules = Modules(mdls)
     return modules
