@@ -5,27 +5,27 @@
   "commands": {
 
     "Новая вкладка" : {
-    "path" : "/Modules/OS/newPage.py",
+    "path" : "/Modules/FireFox/newPage.py",
     "Параметры": "-",
     "Описание": "Открытие новой вкладки в браузере FireFox"
     },
     "Закрыть браузер" : {
-    "path" : "/Modules/OS/closeBrowser.py",
+    "path" : "/Modules/FireFox/closeBrowser.py",
     "Параметры": "-",
     "Описание": "Закрытие браузера FireFox"
     },
     "Закрыть вкладку" : {
-    "path" : "/Modules/OS/closePage.py",
+    "path" : "/Modules/FireFox/closePage.py",
     "Параметры": "-",
     "Описание": "Закрытие текущей вкладки FireFox"
     },
     "Cледующая вкладка//Вправо//Направо" : {
-    "path" : "/Modules/OS/moveRight.py",
+    "path" : "/Modules/FireFox/moveRight.py",
     "Параметры": "-",
     "Описание": "Перемещение на следующую вкладку FireFox"
     },
     "Предыдущая вкладка//Влево//Налево" : {
-    "path" : "/Modules/OS/moveLeft.py",
+    "path" : "/Modules/FireFox/moveLeft.py",
     "Параметры": "-",
     "Описание": "Перемещение на предыдущую вкладку FireFox"
     }
