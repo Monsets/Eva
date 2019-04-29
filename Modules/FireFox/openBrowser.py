@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import pyautogui as pgui
 import subprocess
 import time

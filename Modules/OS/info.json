@@ -1,7 +1,7 @@
 {
 "module_name" : "OS",
 "module_ver" : "0.1",
-"app_name" : "Операционная система",
+"app_name" : "systemd",
 "commands":
 {
 

@@ -84,8 +84,8 @@ if __name__ == "__main__":
             if (
                 str(phrase) == "открой терминал"
             ):  # пока активационная фраза открой терминал
-
-                text,system = recognize()
+                print("GOTOVO")
+                text, system = recognize()
 
                 history = History()
-                history.save_params(text,phrase,10,system)
+                history.save_params(text, phrase, 10, system)

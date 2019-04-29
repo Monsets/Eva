@@ -13,12 +13,6 @@ def main():
     modules = init_modules('Modules')
     mini_app = MiniApp(modules)
     window = EvaApp(mini_app, modules)  # Создаём объект класса
-    settings = QSettings()
-    data = {'one': 1, 'two': 2}
-    settings.setValue('data', data)
-
-    data = settings.value('data')
-    print(data)
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 
