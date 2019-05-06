@@ -3,4 +3,8 @@
 import pyautogui as pgui
 import subprocess
 
-pgui.hotkey('ctrl', 'pagedown')
+def moveLeft():
+    pgui.hotkey('ctrl', 'pagedown')
+
+if __name__ == '__main__':
+    moveLeft()

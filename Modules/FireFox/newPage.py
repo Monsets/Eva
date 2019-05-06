@@ -2,4 +2,8 @@
 import pyautogui as pgui
 import subprocess
 
-pgui.hotkey('ctrl', 't')
+def newPage():
+    pgui.hotkey('ctrl', 't')
+
+if __name__ == '__main__':
+    newPage()

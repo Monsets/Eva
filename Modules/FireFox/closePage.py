@@ -3,4 +3,8 @@
 import pyautogui as pgui
 import subprocess
 
-pgui.hotkey('ctrl', 'w')
+def closePage():
+    pgui.hotkey('ctrl', 'w')
+
+if __name__ == '__main__':
+    closePage()

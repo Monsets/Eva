@@ -2,11 +2,15 @@
 
 import sys,subprocess, os
 
-if __name__ == "__main__":
+def delete():
     if len(sys.argv) <= 2:
         if os.path.isfile(sys.argv[1]):
-            rm ="rm"
+            rm = "rm"
             subprocess.call([rm, str(sys.argv[1])])
         else:
-            rm ="rmdir"
+            rm = "rmdir"
             subprocess.call([rm, str(sys.argv[1])])
+
+
+if __name__ == "__main__":
+    delete()

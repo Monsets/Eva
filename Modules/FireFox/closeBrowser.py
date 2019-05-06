@@ -3,5 +3,11 @@
 import pyautogui as pgui
 import subprocess, time
 
-time.sleep(5)
-pgui.hotkey('ctrl','shift' ,'w')
+def closeBrowser():
+    time.sleep(3)
+    test = pgui.hotkey('ctrl','shift' ,'w')
+    print(test)
+    return test
+
+if __name__ == '__main__':
+    closeBrowser()
