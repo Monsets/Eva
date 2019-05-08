@@ -6,14 +6,15 @@ from datetime import datetime
 from pocketsphinx import LiveSpeech, get_model_path
 from Application.Recognizer.check_internet import check_internet_connection
 from Application.history import History
+import Application.Recognizer.speech_conversion_conf as sc
 
 
 def recognition_google():
     """We get the command and save file"""
     date = datetime.now()
     file_name = (
-        "../../History" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
-    )  # 'audio/' заменить на каталог сохранения
+            "../History/Audio/" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
+    )
     r = sr.Recognizer()
     mic = sr.Microphone()
 
@@ -27,11 +28,19 @@ def recognition_google():
 
 def recognition_sphinx(speech):
     """We get the command"""
+    print("Произнесите команду в течении 10 секунд")
     timeuot = time.time() + 10
-    for phrase in speech:
-        print(phrase)
-        if time.time() > timeuot:
-            break
+    while time.time() < timeuot:
+
+        if(speech == None):
+            print("Пока ничего не сказано")
+        else:
+            print("До",speech)
+            for phrase in speech:
+                print(phrase)
+                print(speech)
+
+    print("Время вышло")
 
     return 0
 
@@ -39,53 +48,37 @@ def recognition_sphinx(speech):
 def recognize():
     internet_connection = check_internet_connection()
 
-    if internet_connection:
-        text = recognition_google()
-        return text,"Google"
-    else:
-        text = recognition_sphinx(speech)
-        return text,"Sphinx"
-
+    #if internet_connection:
+    #    text = recognition_google()
+    #    return text, "Google"
+    #else:
+    text = recognition_sphinx(background)
+    return text, "Sphinx"
 
 
 if __name__ == "__main__":
-    model_path = get_model_path()
-    history = History()
-    history.addToXml(1, 1, 1, 1, 1)
-    """Creating an object for command"""
-    speech = LiveSpeech(
-        verbose=False,
-        sampling_rate=16000,
-        buffer_size=2048,
-        no_search=False,
-        full_utt=False,
-        hmm=os.path.join(model_path, "zero_ru.cd_cont_4000"),
-        lm=os.path.join(model_path, "ru.lm"),
-        dic=os.path.join(model_path, "ru.dic"),
-    )
+
+    # history = History()
+    # history.addToXml(1, 1, 1, 1, 1)
+
+
+    """ Creating an object for command """
+    background = LiveSpeech(**sc.background_config)
 
     print("go")
 
     """Creating an object for an activation word"""
-    activacion = LiveSpeech(
-        verbose=True,
-        sampling_rate=16000,
-        buffer_size=2048,
-        no_search=False,
-        full_utt=False,
-        hmm=os.path.join(model_path, "zero_ru.cd_cont_4000"),
-        lm=False,
-        jsgf=os.path.join(model_path, "TEST/activ.jsgf"),
-        dic=os.path.join(model_path, "TEST/my_dictionary_out"),
-    )
+    activation = LiveSpeech(**sc.activation_config)
 
     while True:
-        for phrase in activacion:
-            if (
-                str(phrase) == "открой терминал"
-            ):  # пока активационная фраза открой терминал
-                print("GOTOVO")
-                text, system = recognize()
+        for phrase in activation:
 
-                history = History()
-                history.save_params(text, phrase, 10, system)
+            print("GOTOVO")
+            print(phrase.segments(detailed=True))
+            text, system = recognize()
+
+            #history = History()
+            #history.save_params(text, phrase, 10, system)
+
+
+

@@ -4,7 +4,10 @@ def recognize_and_execute(modules):
 
     try:
         text = recognize()
-    except:
+    except Exception as e:
+        print(e.args)
+        print(e)
+
         print("Речь не распознана")
         raise NameError("Речь не распознана")
 
