@@ -1,0 +1,61 @@
+{
+  "module_name": "FireFox",
+  "module_ver": "1.0",
+  "app_name": "firefox",
+  "commands": [
+    {
+      "command": "Новая вкладка",
+      "path" : "newPage.py",
+      "parameters": "-",
+      "description": "Открытие новой вкладки в браузере FireFox"
+    },
+    {
+      "command": "Закрыть браузер" ,
+      "path" : "closeBrowser.py",
+      "parameters": "-",
+      "description": "Закрытие браузера FireFox"
+    },
+    {
+      "command": "Закрыть вкладку",
+      "path" : "closePage.py",
+      "parameters": "-",
+      "description": "Закрытие текущей вкладки FireFox"
+    },
+    {
+      "command": "Cледующая вкладка" ,
+      "path" : "moveRight.py",
+      "parameters": "-",
+      "description": "Перемещение на следующую вкладку FireFox"
+    },
+    {
+      "command": "Направо",
+      "path" : "moveRight.py",
+      "parameters": "-",
+      "description": "Перемещение на следующую вкладку FireFox"
+    },
+    {
+      "command": "Вправо" ,
+      "path" : "moveRight.py",
+      "parameters": "-",
+      "description": "Перемещение на следующую вкладку FireFox"
+    },
+    {
+      "command": "Предыдущая вкладка",
+      "path" : "moveLeft.py",
+      "parameters": "-",
+      "description": "Перемещение на предыдущую вкладку FireFox"
+    },
+    {
+      "command": "Влево",
+      "path" : "moveLeft.py",
+      "parameters": "-",
+      "description": "Перемещение на предыдущую вкладку FireFox"
+    },
+    {
+      "command": "Налево",
+      "path" : "moveLeft.py",
+      "parameters": "-",
+      "description": "Перемещение на предыдущую вкладку FireFox"
+    }
+    ]
+}

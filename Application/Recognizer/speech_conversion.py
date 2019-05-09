@@ -1,7 +1,3 @@
-import logging
-
-logging.basicConfig(level=logging.DEBUG, format='(%(threadName)-10s) %(message)s',)
-
 import speech_recognition as sr
 import os
 import time
@@ -15,12 +11,13 @@ import Application.Recognizer.speech_conversion_conf as sc
 import threading
 import time
 
+
 def recognition_google():
     """We get the command and save file"""
-    print("go")
+    print("google")
     date = datetime.now()
     file_name = (
-            "../History/Audio/" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
+            "./Application/History/Audio/" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
     )
     r = sr.Recognizer()
     mic = sr.Microphone()
@@ -29,99 +26,78 @@ def recognition_google():
         audio = r.listen(source)
         with open(file_name, "wb") as f:
             f.write(audio.get_wav_data())
+    try:
+        return r.recognize_google(audio, language="ru-RU")
+    except:
+        return ""
 
-    return r.recognize_google(audio, language="ru-RU")
 
-
-def recognition_sphinx(speech):
+def recognition_sphinx(speech, status):
     """We get the command"""
     print("Произнесите команду в течении 10 секунд")
-    timeuot = time.time() + 10
-    while time.time() < timeuot:
-        print("1",speech,"2")
-        print(type(speech))
-        if(speech == "  "):
-            print("Пока ничего не сказано")
-        else:
-            print("До",speech)
-            for phrase in speech:
-                print(phrase)
-                print(speech)
 
-    print("Время вышло")
+    # Need to add recording and saving audio track
 
-    return 0
+    for phrase in speech:
+        if status.isSet():
+            status.clear()
+            print("Команда получена")
+            return phrase
 
 
 def recognize():
-
     print("go")
+    """ Creating an object for command """
     background = LiveSpeech(**sc.background_config)
+
+    """Creating an object for an activation word"""
     activation = LiveSpeech(**sc.activation_config)
 
-    e = threading.Event()
+    status = threading.Event()
 
-    t1 = threading.Thread(name='wait_activ_phrase', target=processing_activation_phrase, args=(activation, e))
+    activation_thread = threading.Thread(name='wait_activ_phrase', target=processing_activation_phrase, args=(activation, status))
 
-    t1.start()
+    activation_thread.start()
 
-    t2 = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, e))
+    background_thread = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, status))
 
-    t2.start()
+    background_thread.start()
 
 
-def processing_background_phrase(background, e):
+def processing_background_phrase(background, status):
     print("start back")
 
     while True:
-        if e.isSet():
+        if status.isSet():
             print("Cобытие произошло")
             internet_connection = check_internet_connection()
 
-            if internet_connection:
+            if not internet_connection:
                 text = recognition_google()
 
                 print(text)
-                return text, "Google"
+                status.clear()
+                #return text, "Google"
             else:
-                text = recognition_sphinx(background)
-                return text, "Sphinx"
+                text = recognition_sphinx(background, status)
+                print(text)
+
+                # return text, "Sphinx"
 
 
-def processing_activation_phrase(activation, e):
+def processing_activation_phrase(activation, status):
     print("start activ")
 
-    for phrase in activation:
-        print("GOTOVO")
-        print(phrase.segments(detailed=True))
-        e.set()
-        time.sleep(10)
-        print("больше не сплю")
-        e.clear()
-
-
+    while True:
+        for phrase in activation:
+            print("Активационная фраза распознана")
+            print(phrase.segments(detailed=True))
+            status.set()
+            time.sleep(10)
+            print("больше не сплю")
+            print(threading.enumerate())
 
 
 if __name__ == "__main__":
-
-
     recognize()
-    """ Creating an object for command """
-    #background = LiveSpeech(**sc.background_config)
-
-    #print("go")
-
-    """Creating an object for an activation word"""
-    #activation = LiveSpeech(**sc.activation_config)
-
-    #while True:
-        #for phrase in activation:
-            #print("GOTOVO")
-            #print(phrase.segments(detailed=True))
-            #text, system = recognize()
-
-            #history = History()
-            #history.save_params(text, phrase, 10, system)
-
-
 

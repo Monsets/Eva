@@ -1,0 +1,4 @@
+#!/bin/bash
+
+perl dict2transcript.pl in_dictionary dictionary
+cp ./dictionary ../dictionary

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+model_name="language_model";
+
+text2wfreq <${model_name}.txt | wfreq2vocab> ${model_name}.tmp.vocab;
+cp ${model_name}.tmp.vocab  ${model_name}.vocab;
+text2idngram -vocab ${model_name}.vocab -idngram ${model_name}.idngram < ${model_name}.txt;
+idngram2lm -vocab_type 0 -idngram ${model_name}.idngram -vocab ${model_name}.vocab -arpa ${model_name}.arpa;
+sphinx_lm_convert -i ${model_name}.arpa -o ${model_name}.lm.DMP;
+
+rm -rf ${model_name}.arpa ${model_name}.idngram ${model_name}.tmp.vocab ${model_name}.vocab ${model_name}.txt
+

@@ -21,11 +21,11 @@ background_config = {
     'full_utt': False,
     'hmm': acoustic_model,
     'lm': language_model,
-    'dict': dictionary
+    'dict': dictionary,
 }
 
 activation_config = {
     'lm': False,
     'keyphrase': 'eva',
-    'kws_threshold': 1e-15,
+    'kws_threshold': 1e-20,
 }
