@@ -5,13 +5,13 @@
 
 
 # path to language model
-language_model = "./Resources/language_model.lm.DMP"
+language_model = "./Application/Recognizer/Resources/language_model.lm.DMP"
 
 # path to dictionary
-dictionary = "./Resources/dictionary"
+dictionary = "./Application/Recognizer/Resources/dictionary"
 
 # path to acoustic model files (templates for individual sounds).
-acoustic_model = "./Resources/Acoustic_model_RU"
+acoustic_model = "./Application/Recognizer/Resources/Acoustic_model_RU"
 
 
 background_config = {

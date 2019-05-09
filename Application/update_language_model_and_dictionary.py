@@ -59,7 +59,7 @@ def get_commands(modules=[]):
             data = json.load(f)
 
     for item in data["commands"]:
-        commands.append("<s> " + item["command"].lower() + " <s>")
+        commands.append("<s> " + item["command"].lower() + " </s>")
         speech += (item["command"].lower()).split(' ')
 
     dictionary = set(speech)

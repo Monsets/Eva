@@ -72,7 +72,7 @@ def processing_background_phrase(background, status):
             print("Cобытие произошло")
             internet_connection = check_internet_connection()
 
-            if not internet_connection:
+            if internet_connection:
                 text = recognition_google()
 
                 print(text)
