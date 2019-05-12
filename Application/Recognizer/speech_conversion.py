@@ -49,7 +49,6 @@ def recognize():
 
 if __name__ == "__main__":
     history = History()
-    history.addToXml(2,2,2,2,2,2,2)
     model_path = get_model_path()
     """Creating an object for command"""
     speech = LiveSpeech(
