@@ -12,7 +12,7 @@ def recognition_google():
     """We get the command and save file"""
     date = datetime.now()
     file_name = (
-        "../../History" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
+            "../../History" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
     )  # 'audio/' заменить на каталог сохранения
     r = sr.Recognizer()
     mic = sr.Microphone()
@@ -40,12 +40,11 @@ def recognize():
     internet_connection = check_internet_connection()
 
     if internet_connection:
-        text,filename = recognition_google()
-        return text,filename,"Google"
+        text, filename = recognition_google()
+        return text, filename, "Google"
     else:
         text = recognition_sphinx(speech)
-        return text,"Sphinx"
-
+        return text, "Sphinx"
 
 
 if __name__ == "__main__":
@@ -81,7 +80,7 @@ if __name__ == "__main__":
     while True:
         for phrase in activacion:
             if (
-                str(phrase) == "открой терминал"
+                    str(phrase) == "открой терминал"
             ):  # пока активационная фраза открой терминал
                 print("GOTOVO")
                 text, filename, system = recognize()

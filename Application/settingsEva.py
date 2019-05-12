@@ -5,6 +5,7 @@ from Application.generated_design import (
     Ui_MainWindow,
 )
 
+
 class SettingsEva:
     global settings
     settings = QSettings()
@@ -22,7 +23,7 @@ class SettingsEva:
 
     def save_slider_micro(self, value):
         settings.setValue("slider_micro", value)
-        settings.sync ()
+        settings.sync()
         print("slider_micro_value_saving = ", value)
 
     """-------Сохранение состояния чекбокса "Горячая клавиша"-------"""
@@ -128,38 +129,37 @@ class testSettings(unittest.TestCase):
     settings = QSettings()
     SettingsEva = SettingsEva()
 
-
     def test_save_slider_micro(self):
         slider_micro_value = settings.value("slider_micro")
-        SettingsEva.save_slider_micro(self,int(slider_micro_value)+10)
+        SettingsEva.save_slider_micro(self, int(slider_micro_value) + 10)
         slider_micro_chgValue = settings.value("slider_micro")
         SettingsEva.save_slider_micro(self, int(slider_micro_value))
         self.assertFalse(slider_micro_value == slider_micro_chgValue)
 
     def test_save_CheckBox_HotKey(self):
         CheckBox_HotKey_value = settings.value("CheckBox_HotKey", True, type=bool)
-        SettingsEva.save_CheckBox_HotKey(self,not CheckBox_HotKey_value)
+        SettingsEva.save_CheckBox_HotKey(self, not CheckBox_HotKey_value)
         CheckBox_HotKey_chgValue = settings.value("CheckBox_HotKey", True, type=bool)
         SettingsEva.save_CheckBox_HotKey(self, CheckBox_HotKey_value)
         self.assertFalse(CheckBox_HotKey_value == CheckBox_HotKey_chgValue)
 
     def test_save_CheckBox_KeyWork(self):
         CheckBox_KeyWork_value = settings.value("CheckBox_KeyWork", True, type=bool)
-        SettingsEva.save_CheckBox_KeyWork(self,not CheckBox_KeyWork_value)
+        SettingsEva.save_CheckBox_KeyWork(self, not CheckBox_KeyWork_value)
         CheckBox_KeyWork_chgValue = settings.value("CheckBox_KeyWork", True, type=bool)
         SettingsEva.save_CheckBox_KeyWork(self, CheckBox_KeyWork_value)
         self.assertFalse(CheckBox_KeyWork_value == CheckBox_KeyWork_chgValue)
 
     def test_save_CheckBox_KeyWork(self):
         CheckBox_KeyWork_value = settings.value("CheckBox_KeyWork", True, type=bool)
-        SettingsEva.save_CheckBox_KeyWork(self,not CheckBox_KeyWork_value)
+        SettingsEva.save_CheckBox_KeyWork(self, not CheckBox_KeyWork_value)
         CheckBox_KeyWork_chgValue = settings.value("CheckBox_KeyWork", True, type=bool)
         SettingsEva.save_CheckBox_KeyWork(self, CheckBox_KeyWork_value)
         self.assertFalse(CheckBox_KeyWork_value == CheckBox_KeyWork_chgValue)
 
     def test_save_slider_font(self):
         slider_font_value = settings.value("slider_font")
-        SettingsEva.save_slider_font(self,int(slider_font_value)+10)
+        SettingsEva.save_slider_font(self, int(slider_font_value) + 10)
         slider_font_chgValue = settings.value("slider_font")
         SettingsEva.save_slider_font(self, int(slider_font_value))
         self.assertFalse(slider_font_value == slider_font_chgValue)
@@ -167,9 +167,9 @@ class testSettings(unittest.TestCase):
     def test_save_ToggleSlider_TextNotify(self):
         ToggleSlider_TextNotify_value = settings.value("ToggleSlider_TextNotify")
         if int(ToggleSlider_TextNotify_value) == 0:
-            SettingsEva.save_ToggleSlider_TextNotify(self,1)
+            SettingsEva.save_ToggleSlider_TextNotify(self, 1)
         else:
-            SettingsEva.save_ToggleSlider_TextNotify(self,0)
+            SettingsEva.save_ToggleSlider_TextNotify(self, 0)
         ToggleSlider_TextNotify_chgValue = settings.value("ToggleSlider_TextNotify")
         SettingsEva.save_ToggleSlider_TextNotify(self, int(ToggleSlider_TextNotify_value))
         self.assertFalse(ToggleSlider_TextNotify_value == ToggleSlider_TextNotify_chgValue)
@@ -177,16 +177,16 @@ class testSettings(unittest.TestCase):
     def test_save_ToggleSlider_SoundNotify(self):
         ToggleSlider_SoundNotify_value = settings.value("ToggleSlider_SoundNotify")
         if int(ToggleSlider_SoundNotify_value) == 0:
-            SettingsEva.save_ToggleSlider_SoundNotify(self,1)
+            SettingsEva.save_ToggleSlider_SoundNotify(self, 1)
         else:
-            SettingsEva.save_ToggleSlider_SoundNotify(self,0)
+            SettingsEva.save_ToggleSlider_SoundNotify(self, 0)
         ToggleSlider_SoundNotify_chgValue = settings.value("ToggleSlider_SoundNotify")
         SettingsEva.save_ToggleSlider_SoundNotify(self, int(ToggleSlider_SoundNotify_value))
         self.assertFalse(ToggleSlider_SoundNotify_value == ToggleSlider_SoundNotify_chgValue)
 
     def test_save_HotKey_Choosen(self):
         HotKey_Choosen_value = settings.value("HotKey_Choosen")
-        SettingsEva.save_HotKey_Choosen(self,'Alt+Ctrl+Shift+F10')
+        SettingsEva.save_HotKey_Choosen(self, 'Alt+Ctrl+Shift+F10')
         HotKey_Choosen_chgValue = settings.value("HotKey_Choosen")
         SettingsEva.save_HotKey_Choosen(self, HotKey_Choosen_value)
         self.assertFalse(HotKey_Choosen_value == HotKey_Choosen_chgValue)
