@@ -7,8 +7,5 @@
 		<system>Google</system>
 		<date>2019</date>
 	</id>
-<id ID="1"><path>1</path>
-      <text>1</text>
-      <command>1</command>
-      <similarity>1</similarity><system>1</system><date>1</date></id>
+<id ID="2"><path>2</path><text>2</text><command>2</command><similarity>2</similarity><system>2</system><date>2</date></id>
       </History>

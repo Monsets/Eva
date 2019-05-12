@@ -1,7 +1,7 @@
 import uuid, datetime, os
 import xml.etree.ElementTree as xml
 
-PATH = "History/"
+PATH = "../History/"
 
 
 class History(object):
@@ -20,7 +20,7 @@ class History(object):
         self.addToXml(self.id, self.text, self.path, self.command, self.similarity, self.system, self.date)
 
     def addToXml(self, id, text, command, filename, similarity, system, date):
-        tree = xml.ElementTree(file="../History/history.xml")
+        tree = xml.ElementTree(file=PATH+"history.xml")
         root = tree.getroot()
 
         attrib = {'ID': str(id)}
@@ -29,26 +29,25 @@ class History(object):
 
         self.text = xml.SubElement(self.id, 'path')
         self.text.text = str(filename)
-        self.text.tail = "\n      "
+
 
         self.text = xml.SubElement(self.id, 'text')
         self.text.text = str(text)
-        self.text.tail = "\n      "
+
 
         self.command = xml.SubElement(self.id, 'command')
         self.command.text = str(command)
-        self.command.tail = "\n      "
+
 
         self.similarity = xml.SubElement(self.id, 'similarity')
         self.similarity.text = str(similarity)
-        self.command.tail = "\n      "
+
 
         self.system = xml.SubElement(self.id, 'system')
         self.system.text = str(system)
-        self.command.tail = "\n      "
+
 
         self.date = xml.SubElement(self.id, 'date')
         self.date.text = str(date)
-        self.command.tail = "\n      "
 
-        tree.write("../History/history.xml")
+        tree.write(PATH+"history.xml")
