@@ -1,15 +1,12 @@
 import speech_recognition as sr
-import os
+import Application.Recognizer.speech_conversion_conf as sc
+import threading
 import time
+
 
 from datetime import datetime
 from pocketsphinx import LiveSpeech, get_model_path
 from Application.Recognizer.check_internet import check_internet_connection
-from Application.history import History
-import Application.Recognizer.speech_conversion_conf as sc
-
-import threading
-import time
 
 
 def recognition_google():
@@ -24,8 +21,8 @@ def recognition_google():
 
     with mic as source:
         audio = r.listen(source)
-        with open(file_name, "wb") as f:
-            f.write(audio.get_wav_data())
+    #    with open(file_name, "wb") as f:
+    #        f.write(audio.get_wav_data())
     try:
         return r.recognize_google(audio, language="ru-RU")
     except:
@@ -46,22 +43,31 @@ def recognition_sphinx(speech, status):
 
 
 def recognize():
+    if check_internet_connection():
+        text = recognition_google()
+        print("GOOGLE: {}".format(text))
+    else:
+        return None
+    return (text, "google")
+
+def build_listener():
     print("go")
     """ Creating an object for command """
-    background = LiveSpeech(**sc.background_config)
+    # background = LiveSpeech(**sc.background_config)
 
     """Creating an object for an activation word"""
     activation = LiveSpeech(**sc.activation_config)
 
     status = threading.Event()
 
-    activation_thread = threading.Thread(name='wait_activ_phrase', target=processing_activation_phrase, args=(activation, status))
+    activation_thread = threading.Thread(name='wait_activ_phrase', target=processing_activation_phrase,
+                                         args=(activation, status))
 
     activation_thread.start()
 
-    background_thread = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, status))
+    #background_thread = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, status))
 
-    background_thread.start()
+    #background_thread.start()
 
 
 def processing_background_phrase(background, status):
@@ -99,5 +105,5 @@ def processing_activation_phrase(activation, status):
 
 
 if __name__ == "__main__":
-    recognize()
+    build_listener()
 

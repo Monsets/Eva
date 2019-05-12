@@ -31,6 +31,7 @@ class Ui_mini_app(object):
         self.Text_RecognizedCommand = QtWidgets.QTextEdit(self.centralwidget)
         self.Text_RecognizedCommand.setGeometry(QtCore.QRect(104, 9, 207, 62))
         self.Text_RecognizedCommand.setStyleSheet("border: None;")
+        self.Text_RecognizedCommand.setReadOnly(True)
         self.Text_RecognizedCommand.setObjectName("Text_RecognizedCommand")
         mini_app.setCentralWidget(self.centralwidget)
 

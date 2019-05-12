@@ -22,6 +22,7 @@ class Modules():
         self.__modules = modules
         self.__current = 0
 
+
     def __getitem__(self, key):
         return self.__modules[key]
 

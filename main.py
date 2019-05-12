@@ -1,12 +1,9 @@
 import sys  # sys нужен для передачи argv в QApplication
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QSettings
 from Application.functional_design import EvaApp
 from Application.mini_app import MiniApp
 from Application.modules import init_modules
-
-from Application.history import History
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

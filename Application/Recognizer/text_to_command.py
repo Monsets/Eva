@@ -6,11 +6,10 @@ def recognize_and_execute(modules):
         text = recognize()
     except Exception as e:
         print(e.args)
-        print(e)
 
         print("Речь не распознана")
         raise NameError("Речь не распознана")
-
+    print(text)
     text = text[0]
     print("DEBUG recognized command: {}".format(text))
 
