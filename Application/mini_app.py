@@ -94,8 +94,6 @@ class MiniApp(QtWidgets.QMainWindow):
                 print("Активационная фраза распознана")
                 self.show_output()
                 status.set()
-                time.sleep(10)
-                print("больше не сплю")
 
     def set_window_flags(self):
         #stay on top.

@@ -111,7 +111,7 @@ def install_package(package_name):
 
 def __is_json(filename):
     filename, file_extenstion = os.path.splitext(filename)
-    if file_extenstion == 'info.json':
+    if file_extenstion == 'json':
         return True
     return False
 
@@ -121,6 +121,7 @@ def init_modules(path_to_modules):
     for dirpath, dirnames, filenames in os.walk(path_to_modules):
         for file in filenames:
             if __is_json(file):
+                print(file)
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
                 #commands to lower case
@@ -129,7 +130,7 @@ def init_modules(path_to_modules):
                     commands[key.lower()] = d
                 module = Module(data['module_name'], data['module_ver'], data['app_name'], commands, dirpath)
                 mdls.append(module)
-
+                print(module)
 
 
     modules = Modules(mdls)
