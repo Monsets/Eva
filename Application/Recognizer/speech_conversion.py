@@ -22,7 +22,7 @@ def recognition_google():
         with open(file_name, "wb") as f:
             f.write(audio.get_wav_data())
 
-    return r.recognize_google(audio, language="ru-RU")
+    return r.recognize_google(audio, language="ru-RU"), file_name
 
 
 def recognition_sphinx(speech):
@@ -40,8 +40,8 @@ def recognize():
     internet_connection = check_internet_connection()
 
     if internet_connection:
-        text = recognition_google()
-        return text,"Google"
+        text,filename = recognition_google()
+        return text,filename,"Google"
     else:
         text = recognition_sphinx(speech)
         return text,"Sphinx"
@@ -49,9 +49,8 @@ def recognize():
 
 
 if __name__ == "__main__":
-    model_path = get_model_path()
     history = History()
-    history.addToXml(1, 1, 1, 1, 1)
+    model_path = get_model_path()
     """Creating an object for command"""
     speech = LiveSpeech(
         verbose=False,
@@ -85,7 +84,5 @@ if __name__ == "__main__":
                 str(phrase) == "открой терминал"
             ):  # пока активационная фраза открой терминал
                 print("GOTOVO")
-                text, system = recognize()
-
-                history = History()
-                history.save_params(text, phrase, 10, system)
+                text, filename, system = recognize()
+                history.save_params(text, filename, phrase, 10, system)

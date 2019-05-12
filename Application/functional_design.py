@@ -45,7 +45,7 @@ class EvaApp(QtWidgets.QMainWindow):
     def save_setings(self):
         self.settingsEva = SettingsEva()
         # Сохранение значения слайдера громкости микрофона
-        self.settingsEva.slider_micro(self.ui.Slider_Micro_Volume, 50)
+        self.settingsEva.slider_micro(self.ui.Slider_Micro_Volume)
         # Сохранение состояния чекбокса "Горячая клавиша"
         self.settingsEva.CheckBox_HotKey(self.ui.CheckBox_HotKey)
         # Сохранение состояния чекбокса "Ключевое слово"

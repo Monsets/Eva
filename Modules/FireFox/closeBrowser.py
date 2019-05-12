@@ -2,6 +2,7 @@
 
 import pyautogui as pgui
 import subprocess, time
+import os
 
 def closeBrowser():
     time.sleep(3)
