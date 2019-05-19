@@ -150,13 +150,6 @@ class testSettings(unittest.TestCase):
         SettingsEva.save_CheckBox_KeyWork(self, CheckBox_KeyWork_value)
         self.assertFalse(CheckBox_KeyWork_value == CheckBox_KeyWork_chgValue)
 
-    def test_save_CheckBox_KeyWork(self):
-        CheckBox_KeyWork_value = settings.value("CheckBox_KeyWork", True, type=bool)
-        SettingsEva.save_CheckBox_KeyWork(self, not CheckBox_KeyWork_value)
-        CheckBox_KeyWork_chgValue = settings.value("CheckBox_KeyWork", True, type=bool)
-        SettingsEva.save_CheckBox_KeyWork(self, CheckBox_KeyWork_value)
-        self.assertFalse(CheckBox_KeyWork_value == CheckBox_KeyWork_chgValue)
-
     def test_save_slider_font(self):
         slider_font_value = settings.value("slider_font")
         SettingsEva.save_slider_font(self, int(slider_font_value) + 10)
@@ -190,3 +183,5 @@ class testSettings(unittest.TestCase):
         HotKey_Choosen_chgValue = settings.value("HotKey_Choosen")
         SettingsEva.save_HotKey_Choosen(self, HotKey_Choosen_value)
         self.assertFalse(HotKey_Choosen_value == HotKey_Choosen_chgValue)
+
+

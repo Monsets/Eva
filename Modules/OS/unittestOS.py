@@ -65,7 +65,6 @@ class testOS(unittest.TestCase):
     def test_openTerminal(self):
         os.popen("python3 openTerminal.py")
         processes = list(psutil.process_iter())
-
         for i in processes:
             if "gnome-terminal" in str(i.name):
                 self.assertIn("gnome-terminal",str(i.name))
@@ -78,5 +77,9 @@ class testOS(unittest.TestCase):
     def test_powerOff(self):
         '''TODO: НУЖЕН ИЛИ НЕТ?'''
 
-if __name__ == '__main__':
-    unittest.main()
+
+testLoad = unittest.TestLoader()
+suites = testLoad.loadTestsFromTestCase(testOS)
+
+runner = unittest.TextTestRunner(verbosity=2)
+runner.run(suites)
