@@ -11,7 +11,6 @@ from Application.Recognizer.check_internet import check_internet_connection
 
 def recognition_google():
     """We get the command and save file"""
-    print("google")
     date = datetime.now()
     file_name = (
             "./Application/History/Audio/" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
@@ -21,12 +20,10 @@ def recognition_google():
 
     with mic as source:
         audio = r.listen(source)
-    #    with open(file_name, "wb") as f:
-    #        f.write(audio.get_wav_data())
-    try:
-        return r.recognize_google(audio, language="ru-RU")
-    except:
-        return ""
+        with open(file_name, "wb") as f:
+            f.write(audio.get_wav_data())
+
+    return r.recognize_google(audio, language="ru-RU")
 
 
 def recognition_sphinx(speech, status):
@@ -79,31 +76,12 @@ def processing_background_phrase(background, status):
             print("Cобытие произошло")
             internet_connection = check_internet_connection()
 
-            if internet_connection:
-                text = recognition_google()
-
-                print(text)
-                status.clear()
-                # return text, "Google"
-            else:
-                text = recognition_sphinx(background, status)
-                print(text)
-
-                # return text, "Sphinx"
+    if internet_connection:
+        text = recognition_google()
+        return text,"Google"
+    else:
+        text = recognition_sphinx(speech)
+        return text,"Sphinx"
 
 
-def processing_activation_phrase(activation, status):
-    print("start activ")
 
-    while True:
-        for phrase in activation:
-            print("Активационная фраза распознана")
-            print(phrase.segments(detailed=True))
-            status.set()
-            time.sleep(10)
-            print("больше не сплю")
-            print(threading.enumerate())
-
-
-if __name__ == "__main__":
-    build_listener()

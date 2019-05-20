@@ -1,38 +1,11 @@
 <History>
-    <id ID="testID">
-        <path>History/testID</path>
-        <text>texttest</text>
-        <command>"testCOmand"</command>
-        <similarity>20</similarity>
-        <system>Google</system>
-        <date>2019</date>
-    </id>
-    <id ID="5293aff3f00748fabbdae01d5c5561b0">
-        <text>Hello World</text>
-        <command>Open Terminal</command>
-        <similarity>10</similarity>
-        <system>Google</system>
-        <date>2019-04-29 11:18:25</date>
-    </id>
-    <id ID="f77172b773cf4e56a6974cb3bd01d7da">
-        <text>Hello World</text>
-        <command>Open Terminal</command>
-        <similarity>10</similarity>
-        <system>Google</system>
-        <date>2019-04-29 11:22:51</date>
-    </id>
-    <id ID="94b3e51ea6e146b3b83c85b61d018877">
-        <text>Hello World</text>
-        <command>Open Terminal</command>
-        <similarity>10</similarity>
-        <system>Google</system>
-        <date>2019-04-29 11:26:44</date>
-    </id>
-    <id ID="ad9638b512b24b9da25270b69dd9f90c">
-        <text>Hello World</text>
-        <command>Open Terminal</command>
-        <similarity>10</similarity>
-        <system>Google</system>
-        <date>2019-04-29 11:28:25</date>
-    </id>
-</History>
+	<id ID="testID">
+		<path>History/testID</path>
+		<text>texttest</text>
+		<command>"testCOmand"</command>
+		<similarity>20</similarity>
+		<system>Google</system>
+		<date>2019</date>
+	</id>
+<id ID="2"><path>2</path><text>2</text><command>2</command><similarity>2</similarity><system>2</system><date>2</date></id>
+      </History>
