@@ -53,7 +53,7 @@ def recognize():
 def build_listener():
     print("go")
     """ Creating an object for command """
-    # background = LiveSpeech(**sc.background_config)
+    # background = LiveSpeech(**sc.background_config)6
 
     """Creating an object for an activation word"""
     activation = LiveSpeech(**sc.activation_config)

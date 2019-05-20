@@ -2,9 +2,11 @@ import time
 import speech_recognition as sr
 import Application.Recognizer.speech_conversion_conf as sc
 import threading
+import signal
+import os
+
+
 from pocketsphinx import LiveSpeech, get_model_path
-
-
 from PyQt5 import QtWidgets, QtCore, QtGui
 from Application.mini_app_gen_design import Ui_mini_app
 from Application.Recognizer.text_to_command import recognize_and_execute
@@ -32,6 +34,17 @@ class MiniApp(QtWidgets.QMainWindow):
         self.set_window_flags()
 
         self.build_listener()
+        self.redraw()
+
+    def redraw(self):
+        self.timer = QtCore.QTimer()
+        self.timer.setSingleShot(True)
+        self.timer.timeout.connect(self.redraw)
+        self.timer.start(100)
+
+
+    def handler(self, signum, frame):
+        self.show_output()
 
     def make_button_round(self):
         self.mini_ui.Button_Recognize.setMask(QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
@@ -54,6 +67,13 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.Button_Recognize.setEnabled(False)
         self.mini_ui.Button_Recognize.repaint()
 
+    def set_button_to_normal_mode(self):
+        #resize again after 4 seconds
+        self.timer = QtCore.QTimer()
+        self.timer.setSingleShot(True)
+        self.timer.timeout.connect(self.translate_window_to_start)
+        self.timer.start(4000)
+
     def show_output(self):
         self.set_button_to_waiting_mode()
         try:
@@ -65,11 +85,7 @@ class MiniApp(QtWidgets.QMainWindow):
 
         self.translate_window_for_text()
         self.mini_ui.Text_RecognizedCommand.setText(command)
-        #resize again after 4 seconds
-        self.timer = QtCore.QTimer()
-        self.timer.setSingleShot(True)
-        self.timer.timeout.connect(self.translate_window_to_start)
-        self.timer.start(4000)
+        self.set_button_to_normal_mode()
 
     def build_listener(self):
         print("go")
@@ -81,19 +97,23 @@ class MiniApp(QtWidgets.QMainWindow):
 
         status = threading.Event()
 
+        signal.signal(signal.SIGUSR1, self.handler)
+
+        pid = os.getpid()
+        print(pid)
+
         activation_thread = threading.Thread(name='wait_activ_phrase', target=self.processing_activation_phrase,
-                                             args=(activation, status))
+                                             args=(activation, status, pid))
 
         activation_thread.start()
 
-    def processing_activation_phrase(self, activation, status):
+    def processing_activation_phrase(self, activation, status, pid):
         print("start activ")
 
-        while True:
-            for phrase in activation:
-                print("Активационная фраза распознана")
-                self.show_output()
-                status.set()
+        for phrase in activation:
+            print("Активационная фраза распознана")
+            os.kill(pid, signal.SIGUSR1)
+            status.set()
 
     def set_window_flags(self):
         #stay on top.

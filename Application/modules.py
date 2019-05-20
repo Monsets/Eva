@@ -41,18 +41,15 @@ class Modules():
         '''Obtain list of active windows
         in bottom-to-top order'''
 
-        Gtk.init([])
-        screen = Wnck.Screen.get_default()
-        screen.force_update()
-        #get working windows
-        working_windows = screen.get_windows_stacked()
+        import Xlib.display
+
+        screen = Xlib.display.Display().screen()
+        root_win = screen.root
+
         window_names = []
-        for window in working_windows:
-            pid = window.get_pid()
-            #get name by pid
-            proc = psutil.Process(pid)
-            active_window_name = proc.name()
-            window_names.append(active_window_name)
+        for window in root_win.query_tree()._data['children']:
+            window_name = window.get_wm_name()
+            window_names.append(window_name)
 
         window_names.reverse()
         return window_names
@@ -111,7 +108,7 @@ def install_package(package_name):
 
 def __is_json(filename):
     filename, file_extenstion = os.path.splitext(filename)
-    if file_extenstion == 'json':
+    if file_extenstion == '.json':
         return True
     return False
 
@@ -121,7 +118,6 @@ def init_modules(path_to_modules):
     for dirpath, dirnames, filenames in os.walk(path_to_modules):
         for file in filenames:
             if __is_json(file):
-                print(file)
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
                 #commands to lower case
@@ -130,7 +126,6 @@ def init_modules(path_to_modules):
                     commands[key.lower()] = d
                 module = Module(data['module_name'], data['module_ver'], data['app_name'], commands, dirpath)
                 mdls.append(module)
-                print(module)
 
 
     modules = Modules(mdls)
