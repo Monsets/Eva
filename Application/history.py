@@ -1,4 +1,5 @@
-import uuid, datetime, os
+import datetime
+import uuid
 import xml.etree.ElementTree as xml
 
 PATH = "../History/"

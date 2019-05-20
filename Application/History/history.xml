@@ -1,11 +1,18 @@
 <History>
-	<id ID="testID">
-		<path>History/testID</path>
-		<text>texttest</text>
-		<command>"testCOmand"</command>
-		<similarity>20</similarity>
-		<system>Google</system>
-		<date>2019</date>
-	</id>
-<id ID="2"><path>2</path><text>2</text><command>2</command><similarity>2</similarity><system>2</system><date>2</date></id>
-      </History>
+    <id ID="testID">
+        <path>History/testID</path>
+        <text>texttest</text>
+        <command>"testCOmand"</command>
+        <similarity>20</similarity>
+        <system>Google</system>
+        <date>2019</date>
+    </id>
+    <id ID="2">
+        <path>2</path>
+        <text>2</text>
+        <command>2</command>
+        <similarity>2</similarity>
+        <system>2</system>
+        <date>2</date>
+    </id>
+</History>

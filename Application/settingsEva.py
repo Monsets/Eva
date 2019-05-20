@@ -1,8 +1,6 @@
-from PyQt5.QtCore import QSettings
 import unittest
-from Application.generated_design import (
-    Ui_MainWindow,
-)
+
+from PyQt5.QtCore import QSettings
 
 
 class SettingsEva:
@@ -182,5 +180,3 @@ class testSettings(unittest.TestCase):
         HotKey_Choosen_chgValue = settings.value("HotKey_Choosen")
         SettingsEva.save_HotKey_Choosen(self, HotKey_Choosen_value)
         self.assertFalse(HotKey_Choosen_value == HotKey_Choosen_chgValue)
-
-

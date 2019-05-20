@@ -1,4 +1,3 @@
-import Application.Recognizer.speech_conversion_conf as sc
 import os
 import signal
 import threading

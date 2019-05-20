@@ -1,5 +1,7 @@
 import unittest
+
 import psutil
+
 
 class testBrowser(unittest.TestCase):
 
@@ -7,8 +9,7 @@ class testBrowser(unittest.TestCase):
         processes = list(psutil.process_iter())
         for i in processes:
             if "firefox" in str(i.name):
-                self.assertIn("firefox",str(i.name))
-
+                self.assertIn("firefox", str(i.name))
 
     def test_closePage(self):
         self.assertTrue('FOO'.isupper())

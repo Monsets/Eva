@@ -1,5 +1,4 @@
 import threading
-import time
 from datetime import datetime
 
 import speech_recognition as sr
@@ -20,10 +19,10 @@ def recognition_google():
 
     with mic as source:
         audio = r.listen(source)
-        with open(file_name, "wb") as f:
-            f.write(audio.get_wav_data())
+        # with open(file_name, "wb") as f:
+        #    f.write(audio.get_wav_data())
 
-    return r.recognize_google(audio, language="ru-RU")
+    return r.recognize_google(audio, language="ru-RU sy")
 
 
 def recognition_sphinx(speech, status):
@@ -78,10 +77,7 @@ def processing_background_phrase(background, status):
 
     if internet_connection:
         text = recognition_google()
-        return text,"Google"
+        return text, "Google"
     else:
         text = recognition_sphinx(speech)
-        return text,"Sphinx"
-
-
-
+        return text, "Sphinx"

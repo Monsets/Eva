@@ -5,7 +5,7 @@ def recognize_and_execute(modules):
     try:
         text = recognize()
     except Exception as e:
-        print(e.args)
+        print("Error: ", e.args)
 
         print("Речь не распознана")
         raise NameError("Речь не распознана")
