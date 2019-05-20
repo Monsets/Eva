@@ -63,8 +63,7 @@ def get_commands(modules=[]):
                 commands.append("<s> " + item.lower() + " </s>")
                 speech += (item.lower()).split(' ')
 
-    print(commands)
-    print(speech)
+
     dictionary = set(speech)
 
     return commands, dictionary
@@ -77,5 +76,4 @@ def update_pocketsphinx_files(modules=[]):
 
 
 if __name__ == "__main__":
-
     update_pocketsphinx_files(["FireFox", "OS"])
