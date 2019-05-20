@@ -1,6 +1,7 @@
 import os
 import json
 import subprocess
+import glob
 
 """To generate a dictionary you need to download https://sourceforge.net/projects/cmusphinx/files/cmuclmtk/0.7/  and make """
 
@@ -12,7 +13,7 @@ import subprocess
 __PATH_TO_MODULES__ = "./../Modules/"
 __PATH_FOR_MODEL__ = "./Recognizer/Resources/"
 __PATH_FOR_DICTIONARY__ = "./Recognizer/Resources/text2dict/"
-__INFO__ = "/infoFORUBDATE.json"  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+__INFO__ = "/*.json"
 __MODEL_NAME__ = "language_model"
 
 
@@ -52,15 +53,16 @@ def get_commands(modules=[]):
         modules = os.listdir(__PATH_TO_MODULES__)
 
     for item in modules:
-        path.append(__PATH_TO_MODULES__+item+__INFO__)
+        path.append(glob.glob(__PATH_TO_MODULES__+item+__INFO__)[0])
 
     for module in path:
         with open(module) as f:
             data = json.load(f)
 
-    for item in data["commands"]:
-        commands.append("<s> " + item["command"].lower() + " </s>")
-        speech += (item["command"].lower()).split(' ')
+            for item in data['commands'].keys():
+                commands.append("<s> " + item.lower() + " </s>")
+                speech += (item.lower()).split(' ')
+
 
     dictionary = set(speech)
 
@@ -74,5 +76,4 @@ def update_pocketsphinx_files(modules=[]):
 
 
 if __name__ == "__main__":
-
-    update_pocketsphinx_files(["FireFox"])
+    update_pocketsphinx_files(["FireFox", "OS"])
