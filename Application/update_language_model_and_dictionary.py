@@ -1,14 +1,13 @@
-import os
-import json
-import subprocess
 import glob
+import json
+import os
+import subprocess
 
 """To generate a dictionary you need to download https://sourceforge.net/projects/cmusphinx/files/cmuclmtk/0.7/  and make """
 
 """ In order to use it in the basic code of the program, change the __PATH_TO_MODULES__ ./Modules/"""
 
 """ If you change the __MODEL_NAME_, you need to change the model_name in bash_script"""
-
 
 __PATH_TO_MODULES__ = "./../Modules/"
 __PATH_FOR_MODEL__ = "./Recognizer/Resources/"
@@ -18,7 +17,7 @@ __MODEL_NAME__ = "language_model"
 
 
 def update_language_model(commands):
-    with open(__PATH_FOR_MODEL__+__MODEL_NAME__+".txt", 'w') as f:
+    with open(__PATH_FOR_MODEL__ + __MODEL_NAME__ + ".txt", 'w') as f:
         for item in commands:
             f.write("%s\n" % item)
 
@@ -26,7 +25,6 @@ def update_language_model(commands):
 
 
 def update_dictionary(dictionary):
-
     with open(__PATH_FOR_DICTIONARY__ + "in_dictionary", 'a+') as f:
         for item in dictionary:
             f.write("%s\n" % item)
@@ -40,7 +38,7 @@ def run_bash_script(path, name):
     os.chdir(path)
     subprocess.call(["chmod", "ugo+x", name])
 
-    subprocess.call('./'+name)
+    subprocess.call('./' + name)
     """ Return working directory """
     os.chdir(root)
 
@@ -53,7 +51,7 @@ def get_commands(modules=[]):
         modules = os.listdir(__PATH_TO_MODULES__)
 
     for item in modules:
-        path.append(glob.glob(__PATH_TO_MODULES__+item+__INFO__)[0])
+        path.append(glob.glob(__PATH_TO_MODULES__ + item + __INFO__)[0])
 
     for module in path:
         with open(module) as f:
@@ -62,7 +60,6 @@ def get_commands(modules=[]):
             for item in data['commands'].keys():
                 commands.append("<s> " + item.lower() + " </s>")
                 speech += (item.lower()).split(' ')
-
 
     dictionary = set(speech)
 

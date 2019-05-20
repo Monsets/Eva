@@ -41,5 +41,3 @@ class Ui_mini_app(object):
     def retranslateUi(self, mini_app):
         _translate = QtCore.QCoreApplication.translate
         mini_app.setWindowTitle(_translate("mini_app", "MainWindow"))
-
-

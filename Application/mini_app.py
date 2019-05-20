@@ -1,15 +1,15 @@
-import time
-import speech_recognition as sr
 import Application.Recognizer.speech_conversion_conf as sc
-import threading
-import signal
 import os
+import signal
+import threading
 
-
-from pocketsphinx import LiveSpeech, get_model_path
 from PyQt5 import QtWidgets, QtCore, QtGui
-from Application.mini_app_gen_design import Ui_mini_app
+from pocketsphinx import LiveSpeech
+
+import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.text_to_command import recognize_and_execute
+from Application.mini_app_gen_design import Ui_mini_app
+
 
 class MiniApp(QtWidgets.QMainWindow):
     def __init__(self, modules):
@@ -23,9 +23,9 @@ class MiniApp(QtWidgets.QMainWindow):
 
         self.make_button_round()
 
-        #save app's size for resizing
+        # save app's size for resizing
         self.standart_width = self.width()
-        #get screen size to translate app to the right side
+        # get screen size to translate app to the right side
         self.screen_size = QtWidgets.QDesktopWidget().screenGeometry(-1)
         self.translate_window_to_start()
 
@@ -42,14 +42,14 @@ class MiniApp(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.redraw)
         self.timer.start(100)
 
-
     def handler(self, signum, frame):
         self.show_output()
 
     def make_button_round(self):
-        self.mini_ui.Button_Recognize.setMask(QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
-        self.button_image =  'background-image: url("Application/Source/Icons/mini_app_button_icon.svg");' + \
-                             'background-repeat: no-repeat; background-position: center; border: 10px solid '
+        self.mini_ui.Button_Recognize.setMask(
+            QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
+        self.button_image = 'background-image: url("Application/Source/Icons/mini_app_button_icon.svg");' + \
+                            'background-repeat: no-repeat; background-position: center; border: 10px solid '
 
     def translate_window_to_start(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
@@ -57,10 +57,9 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#FFFFFF;')
         self.mini_ui.Button_Recognize.setEnabled(True)
 
-
     def translate_window_for_text(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
-                        self.standart_width, self.height())
+                         self.standart_width, self.height())
 
     def set_button_to_waiting_mode(self):
         self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#FFFF00;')
@@ -68,7 +67,7 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.Button_Recognize.repaint()
 
     def set_button_to_normal_mode(self):
-        #resize again after 4 seconds
+        # resize again after 4 seconds
         self.timer = QtCore.QTimer()
         self.timer.setSingleShot(True)
         self.timer.timeout.connect(self.translate_window_to_start)
@@ -116,8 +115,7 @@ class MiniApp(QtWidgets.QMainWindow):
             status.set()
 
     def set_window_flags(self):
-        #stay on top.
+        # stay on top.
         self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
-        #no frame
-        #self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-
+        # no frame
+        # self.setWindowFlag(QtCore.Qt.FramelessWindowHint)

@@ -13,7 +13,7 @@ data = {
     'Открыть [Терминал]': "openTerminal.py",
     'Выключить [Компьютер|Ноутбук|Устройство]': "powerOff.py",
     'Перезагрузить [Компьютер|Ноутбук|Устройство]': "reboot.py"
- }
+}
 
 with open('OS.pickle', 'wb') as f:
-     pickle.dump(data, f)
+    pickle.dump(data, f)

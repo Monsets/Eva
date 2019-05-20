@@ -1,11 +1,11 @@
-import speech_recognition as sr
-import Application.Recognizer.speech_conversion_conf as sc
 import threading
 import time
-
-
 from datetime import datetime
-from pocketsphinx import LiveSpeech, get_model_path
+
+import speech_recognition as sr
+from pocketsphinx import LiveSpeech
+
+import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.check_internet import check_internet_connection
 
 
@@ -50,6 +50,7 @@ def recognize():
         return None
     return (text, "google")
 
+
 def build_listener():
     print("go")
     """ Creating an object for command """
@@ -65,9 +66,9 @@ def build_listener():
 
     activation_thread.start()
 
-    #background_thread = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, status))
+    # background_thread = threading.Thread(name='recognize_command', target=processing_background_phrase, args=(background, status))
 
-    #background_thread.start()
+    # background_thread.start()
 
 
 def processing_background_phrase(background, status):
@@ -83,7 +84,7 @@ def processing_background_phrase(background, status):
 
                 print(text)
                 status.clear()
-                #return text, "Google"
+                # return text, "Google"
             else:
                 text = recognition_sphinx(background, status)
                 print(text)
@@ -106,4 +107,3 @@ def processing_activation_phrase(activation, status):
 
 if __name__ == "__main__":
     build_listener()
-

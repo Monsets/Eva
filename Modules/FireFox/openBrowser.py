@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-import pyautogui as pgui
 import subprocess
 import time
+
+import pyautogui as pgui
+
 
 def openBrowser():
     proc = subprocess.call('firefox', shell=True)

@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -151,12 +151,12 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.ComboBox_Micro, 1, 0, 1, 1)
         self.label = QtWidgets.QLabel(self.setting_micro_page)
         self.label.setStyleSheet("color: rgb(65,105,225);")
-        self.label.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_2.setStyleSheet("color: rgb(65,105,225);")
-        self.label_2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
         self.Slider_Micro_Volume = QtWidgets.QSlider(self.setting_micro_page)
@@ -185,12 +185,12 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.label_4 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_4.setStyleSheet("color: rgb(65,105,225);")
-        self.label_4.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label_4.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
         self.label_4.setObjectName("label_4")
         self.gridLayout_2.addWidget(self.label_4, 0, 1, 1, 1)
         self.label_3 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_3.setStyleSheet("color: rgb(65,105,225);")
-        self.label_3.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout_2.addWidget(self.label_3, 0, 0, 1, 1)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
@@ -323,5 +323,3 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Включить звуковое оповещение "))
         self.label_7.setText(_translate("MainWindow", "Размер шрифта"))
         self.label_8.setText(_translate("MainWindow", "Здесь может быть ваша реклама. (8-800-555-35-35)"))
-
-

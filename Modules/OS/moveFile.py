@@ -1,13 +1,15 @@
 #!/usr/bin/python3
 
-import sys,subprocess, os
+import subprocess
+import sys
+
 
 def moveFile():
     if len(sys.argv) > 2:
-        mv ="mv"
+        mv = "mv"
         fromDir = str(sys.argv[1])
         toDir = str(sys.argv[2])
-        subprocess.call([mv, fromDir,toDir])
+        subprocess.call([mv, fromDir, toDir])
 
 
 if __name__ == "__main__":

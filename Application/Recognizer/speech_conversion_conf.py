@@ -2,8 +2,6 @@
    This file contains settings for language
    models and dictionaries."""
 
-
-
 # path to language model
 language_model = "./Application/Recognizer/Resources/language_model.lm.DMP"
 
@@ -12,7 +10,6 @@ dictionary = "./Application/Recognizer/Resources/dictionary"
 
 # path to acoustic model files (templates for individual sounds).
 acoustic_model = "./Application/Recognizer/Resources/Acoustic_model_RU"
-
 
 background_config = {
     'verbose': False,

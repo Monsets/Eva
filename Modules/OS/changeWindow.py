@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-import sys,subprocess, os
+import os
+
 
 def changeWindow():
     os.popen("xhost +")
@@ -9,6 +10,7 @@ def changeWindow():
     pyautogui.hotkey('alt', 'tab')
 
     os.popen("xhost -")
+
 
 if __name__ == "__main__":
     changeWindow()

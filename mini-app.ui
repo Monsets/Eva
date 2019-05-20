@@ -1,75 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mini_app</class>
- <widget class="QMainWindow" name="mini_app">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>320</width>
-    <height>80</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>3</width>
-    <height>0</height>
-   </size>
-  </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: white;</string>
-  </property>
-  <property name="dockNestingEnabled">
-   <bool>false</bool>
-  </property>
-  <property name="unifiedTitleAndToolBarOnMac">
-   <bool>false</bool>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="Button_Recognize">
-    <property name="geometry">
-     <rect>
-      <x>5</x>
-      <y>9</y>
-      <width>89</width>
-      <height>62</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../Downloads/200px-VCS_LOGO_EVA.png</normaloff>../../Downloads/200px-VCS_LOGO_EVA.png</iconset>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="Text_RecognizedCommand">
-    <property name="geometry">
-     <rect>
-      <x>104</x>
-      <y>9</y>
-      <width>207</width>
-      <height>62</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border: None;</string>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
- </widget>
- <resources/>
- <connections/>
+    <class>mini_app</class>
+    <widget class="QMainWindow" name="mini_app">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>320</width>
+                <height>80</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>3</width>
+                <height>0</height>
+            </size>
+        </property>
+        <property name="windowTitle">
+            <string>MainWindow</string>
+        </property>
+        <property name="styleSheet">
+            <string notr="true">background-color: white;</string>
+        </property>
+        <property name="dockNestingEnabled">
+            <bool>false</bool>
+        </property>
+        <property name="unifiedTitleAndToolBarOnMac">
+            <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <widget class="QPushButton" name="Button_Recognize">
+                <property name="geometry">
+                    <rect>
+                        <x>5</x>
+                        <y>9</y>
+                        <width>89</width>
+                        <height>62</height>
+                    </rect>
+                </property>
+                <property name="autoFillBackground">
+                    <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true"/>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+                <property name="icon">
+                    <iconset>
+                        <normaloff>../../Downloads/200px-VCS_LOGO_EVA.png</normaloff>
+                        ../../Downloads/200px-VCS_LOGO_EVA.png
+                    </iconset>
+                </property>
+            </widget>
+            <widget class="QTextEdit" name="Text_RecognizedCommand">
+                <property name="geometry">
+                    <rect>
+                        <x>104</x>
+                        <y>9</y>
+                        <width>207</width>
+                        <height>62</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">border: None;</string>
+                </property>
+                <property name="readOnly">
+                    <bool>true</bool>
+                </property>
+            </widget>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
 </ui>

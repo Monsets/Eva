@@ -1,4 +1,3 @@
-import psutil
 import subprocess
 import gi
 import os
@@ -7,7 +6,6 @@ import json
 gi.require_version('Gtk', '3.0')
 gi.require_version('Wnck', '3.0')
 
-from gi.repository import Gtk, Wnck
 
 class Module():
     def __init__(self, module_name, module_ver, app_name, commands, module_path):
@@ -17,11 +15,11 @@ class Module():
         self.module_path = module_path
         self.commands = commands
 
+
 class Modules():
     def __init__(self, modules):
         self.__modules = modules
         self.__current = 0
-
 
     def __getitem__(self, key):
         return self.__modules[key]
@@ -74,13 +72,13 @@ class Modules():
         '''find command in modules and get its path and args'''
 
         window_names = self.__get_active_windows()
-        #in case when more than one modules which works with one app
+        # in case when more than one modules which works with one app
         for window in window_names:
             module = self.__find_module(window)
 
             if module == None:
                 continue
-            #actual command
+            # actual command
             module_command = self.__command_in_module(command, module)
             if module_command == None:
                 continue
@@ -88,7 +86,6 @@ class Modules():
             args = self.__parse_command(command, module_command)
 
             return os.path.join(module.module_path, module_command['path']), args
-
 
         return None
 
@@ -98,6 +95,7 @@ class Modules():
         print("DEBUG: path to script: {} args: {}".format(path, args))
         subprocess.Popen([path, args])
 
+
 def install_package(package_name):
     try:
         from pip import main as pipmain
@@ -105,6 +103,7 @@ def install_package(package_name):
         from pip._internal import main as pipmain
 
     pipmain(['install', package_name])
+
 
 def __is_json(filename):
     filename, file_extenstion = os.path.splitext(filename)
@@ -120,14 +119,12 @@ def init_modules(path_to_modules):
             if __is_json(file):
                 with open(os.path.join(dirpath, file), 'r') as f:
                     data = json.load(f)
-                #commands to lower case
+                # commands to lower case
                 commands = {}
                 for key, d in zip(data['commands'].keys(), data['commands'].values()):
                     commands[key.lower()] = d
                 module = Module(data['module_name'], data['module_ver'], data['app_name'], commands, dirpath)
                 mdls.append(module)
 
-
     modules = Modules(mdls)
     return modules
-

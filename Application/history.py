@@ -1,4 +1,5 @@
-import uuid, datetime
+import datetime
+import uuid
 import xml.etree.ElementTree as xml
 
 PATH = "History/"
@@ -7,7 +8,7 @@ PATH = "History/"
 class History(object):
     """save History."""
 
-    def save_params(self, text,command, similarity, system):
+    def save_params(self, text, command, similarity, system):
         self.command = command
         self.text = text
         self.similarity = similarity
@@ -16,21 +17,21 @@ class History(object):
         now = datetime.datetime.now()
         self.date = now.strftime("%Y-%m-%d %H:%M:%S")
 
-        self.addToXml(self.id,self.text,self.command,self.similarity,self.system,self.date)
+        self.addToXml(self.id, self.text, self.command, self.similarity, self.system, self.date)
 
-    def addToXml(self, id, text,command, similarity, system, date):
+    def addToXml(self, id, text, command, similarity, system, date):
         tree = xml.ElementTree(file="Application/History/history.xml")
         root = tree.getroot()
 
         attrib = {'ID': str(id)}
-        self.id = xml.SubElement(root,"id",attrib)
+        self.id = xml.SubElement(root, "id", attrib)
         self.id.tail = "\n      "
 
-        self.text = xml.SubElement(self.id,'text')
+        self.text = xml.SubElement(self.id, 'text')
         self.text.text = str(text)
         self.text.tail = "\n      "
 
-        self.command = xml.SubElement(self.id,'command')
+        self.command = xml.SubElement(self.id, 'command')
         self.command.text = str(command)
         self.command.tail = "\n      "
 
@@ -47,6 +48,3 @@ class History(object):
         self.command.tail = "\n      "
 
         tree.write("Application/History/history.xml")
-
-
-

@@ -1,4 +1,3 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QSettings
 
 
@@ -19,7 +18,7 @@ class SettingsEva:
 
     def save_slider_micro(self, value):
         settings.setValue("slider_micro", value)
-        settings.sync ()
+        settings.sync()
         print("slider_micro_value_saving = ", value)
 
     """-------Сохранение состояния чекбокса "Горячая клавиша"-------"""

@@ -1,9 +1,11 @@
 import sys  # sys нужен для передачи argv в QApplication
 
 from PyQt5 import QtWidgets
+
 from Application.functional_design import EvaApp
 from Application.mini_app import MiniApp
 from Application.modules import init_modules
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
@@ -16,4 +18,3 @@ def main():
 
 if __name__ == '__main__':  # Если мы запускаем файл напрямую, а не импортируем
     main()  # то запускаем функцию main()
-

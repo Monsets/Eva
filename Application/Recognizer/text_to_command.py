@@ -1,7 +1,7 @@
 from Application.Recognizer.speech_conversion import recognize
 
-def recognize_and_execute(modules):
 
+def recognize_and_execute(modules):
     try:
         text = recognize()
     except Exception as e:
@@ -26,6 +26,6 @@ def recognize_and_execute(modules):
         raise FileNotFoundError("Скрипт не найден")
     except PermissionError:
         print("Нет прав для выполнения скрипта")
-        raise PermissionError ("Нет прав для выполнения скрипта")
+        raise PermissionError("Нет прав для выполнения скрипта")
 
     return text

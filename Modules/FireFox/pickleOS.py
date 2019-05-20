@@ -9,7 +9,7 @@ data = {
     'Закрыть [Страницу]': "closePage.py",
     'Переместиться [Направо|Вправо|Вперед]': "moveRight.py",
     'Переместиться [Налево|Влево|Назад]': "moveLeft.py",
- }
+}
 
 with open('browser.pickle', 'wb') as f:
-     pickle.dump(data, f)
+    pickle.dump(data, f)

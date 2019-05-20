@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-import sys,subprocess, os
+import os
+import subprocess
+import sys
+
 
 def delete():
     if len(sys.argv) <= 2:

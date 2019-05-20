@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
-import sys,subprocess, os
+import subprocess
+import sys
+
 
 def openFile():
     if len(sys.argv) > 1:
-        opener ="open" if sys.platform == "darwin" else "xdg-open"
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
         subprocess.call([opener, str(sys.argv[1])])
 
 

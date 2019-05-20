@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-import sys,subprocess, os
+import subprocess
+
 
 def reboot():
     subprocess.check_call(['systemctl', 'reboot', '-i'])
