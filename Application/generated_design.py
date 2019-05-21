@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -26,11 +26,11 @@ class Ui_MainWindow(object):
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
         self.Button_History = QtWidgets.QPushButton(self.centralwidget)
-        self.Button_History.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_History.setStyleSheet("color: white;border: none;font: 17px ;text-align:left;")
         self.Button_History.setObjectName("Button_History")
         self.verticalLayout.addWidget(self.Button_History)
         self.Button_Settings = QtWidgets.QPushButton(self.centralwidget)
-        self.Button_Settings.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_Settings.setStyleSheet("color: white;border: none;font: 17px ;text-align:left;")
         self.Button_Settings.setObjectName("Button_Settings")
         self.verticalLayout.addWidget(self.Button_Settings)
         self.settings_button_widget = QtWidgets.QWidget(self.centralwidget)
@@ -46,20 +46,26 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.Button_Settings_Micro = QtWidgets.QPushButton(self.settings_button_widget)
         self.Button_Settings_Micro.setEnabled(True)
-        self.Button_Settings_Micro.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_Settings_Micro.setStyleSheet("color: white;border: none;font: 17px\n"
+"                                                    ;text-align:left;\n"
+"                                                ")
         self.Button_Settings_Micro.setObjectName("Button_Settings_Micro")
         self.verticalLayout_2.addWidget(self.Button_Settings_Micro)
         self.Button_Settings_Interface = QtWidgets.QPushButton(self.settings_button_widget)
-        self.Button_Settings_Interface.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_Settings_Interface.setStyleSheet("color: white;border: none;font: 17px\n"
+"                                                    ;text-align:left;\n"
+"                                                ")
         self.Button_Settings_Interface.setObjectName("Button_Settings_Interface")
         self.verticalLayout_2.addWidget(self.Button_Settings_Interface)
         self.Button_Settings_Notify = QtWidgets.QPushButton(self.settings_button_widget)
-        self.Button_Settings_Notify.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_Settings_Notify.setStyleSheet("color: white;border: none;font: 17px\n"
+"                                                    ;text-align:left;\n"
+"                                                ")
         self.Button_Settings_Notify.setObjectName("Button_Settings_Notify")
         self.verticalLayout_2.addWidget(self.Button_Settings_Notify)
         self.verticalLayout.addWidget(self.settings_button_widget)
         self.Button_Modules = QtWidgets.QPushButton(self.centralwidget)
-        self.Button_Modules.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_Modules.setStyleSheet("color: white;border: none;font: 17px ;text-align:left;")
         self.Button_Modules.setObjectName("Button_Modules")
         self.verticalLayout.addWidget(self.Button_Modules)
         self.line = QtWidgets.QFrame(self.centralwidget)
@@ -70,9 +76,13 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.line)
         self.Button_About = QtWidgets.QPushButton(self.centralwidget)
         self.Button_About.setAutoFillBackground(False)
-        self.Button_About.setStyleSheet("color: white;border: none;font:  17px ;text-align:left;")
+        self.Button_About.setStyleSheet("color: white;border: none;font: 17px ;text-align:left;")
         self.Button_About.setObjectName("Button_About")
         self.verticalLayout.addWidget(self.Button_About)
+        self.exit_Button = QtWidgets.QPushButton(self.centralwidget)
+        self.exit_Button.setStyleSheet("color: white;border: none;font: 17px ;text-align:left;")
+        self.exit_Button.setObjectName("exit_Button")
+        self.verticalLayout.addWidget(self.exit_Button)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -87,7 +97,7 @@ class Ui_MainWindow(object):
         self.ScrollArea_History.setWidgetResizable(True)
         self.ScrollArea_History.setObjectName("ScrollArea_History")
         self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 542, 522))
+        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 98, 28))
         self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
         self.ScrollArea_History.setWidget(self.scrollAreaWidgetContents_8)
         self.gridLayout_4.addWidget(self.ScrollArea_History, 0, 0, 1, 1)
@@ -151,12 +161,12 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.ComboBox_Micro, 1, 0, 1, 1)
         self.label = QtWidgets.QLabel(self.setting_micro_page)
         self.label.setStyleSheet("color: rgb(65,105,225);")
-        self.label.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
+        self.label.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_2.setStyleSheet("color: rgb(65,105,225);")
-        self.label_2.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
         self.Slider_Micro_Volume = QtWidgets.QSlider(self.setting_micro_page)
@@ -185,12 +195,12 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.label_4 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_4.setStyleSheet("color: rgb(65,105,225);")
-        self.label_4.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
+        self.label_4.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label_4.setObjectName("label_4")
         self.gridLayout_2.addWidget(self.label_4, 0, 1, 1, 1)
         self.label_3 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_3.setStyleSheet("color: rgb(65,105,225);")
-        self.label_3.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout_2.addWidget(self.label_3, 0, 0, 1, 1)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
@@ -309,6 +319,7 @@ class Ui_MainWindow(object):
         self.Button_Settings_Notify.setText(_translate("MainWindow", "Уведомления"))
         self.Button_Modules.setText(_translate("MainWindow", "Модули"))
         self.Button_About.setText(_translate("MainWindow", "О приложении"))
+        self.exit_Button.setText(_translate("MainWindow", "Выход"))
         self.label_11.setText(_translate("MainWindow", "Команда"))
         self.label_10.setText(_translate("MainWindow", "Модуль"))
         self.label.setText(_translate("MainWindow", "Выберите микрофон"))
@@ -320,6 +331,8 @@ class Ui_MainWindow(object):
         self.CheckBox_KeyWork.setText(_translate("MainWindow", "Активация по ключевому слову"))
         self.HotKey_Choosen.setKeySequence(_translate("MainWindow", "F1"))
         self.label_5.setText(_translate("MainWindow", "Включить вывод текста на экран"))
-        self.label_6.setText(_translate("MainWindow", "Включить звуковое оповещение "))
+        self.label_6.setText(_translate("MainWindow", "Включить звуковое оповещение"))
         self.label_7.setText(_translate("MainWindow", "Размер шрифта"))
         self.label_8.setText(_translate("MainWindow", "Здесь может быть ваша реклама. (8-800-555-35-35)"))
+
+

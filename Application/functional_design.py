@@ -1,3 +1,6 @@
+import signal
+import os
+
 from PyQt5 import QtWidgets
 
 from Application.generated_design import (
@@ -32,9 +35,8 @@ class EvaApp(QtWidgets.QMainWindow):
     def closeEvent(self, event):
         """docstring"""
         self.mini_app.show()
-
+        self.mini_app.pass_info(self)
         self.hide()
-        # event.ignore()
 
     def init_text_constants(self):
         self.modules_path = "./Modules"
@@ -118,6 +120,7 @@ class EvaApp(QtWidgets.QMainWindow):
             self.display_settings_interface
         )
         self.ui.Button_About.clicked.connect(self.display_about_page)
+        self.ui.exit_Button.clicked.connect(self.quit_app)
 
     def set_button_colors(self, clicked_button):
         # sets buttons bakground color to app's standart
@@ -129,6 +132,9 @@ class EvaApp(QtWidgets.QMainWindow):
         clicked_button.setStyleSheet(
             "background-color: rgb(30,144,255); color: white;border: none;font:  17px ;text-align:left;"
         )
+
+    def quit_app(self):
+        os.kill(os.getpid(), signal.SIGKILL)
 
     def display_settings(self):
         self.set_button_colors(self.ui.Button_Settings)

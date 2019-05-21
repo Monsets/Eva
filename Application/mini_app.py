@@ -1,6 +1,7 @@
 import os
 import signal
 import threading
+import time
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 from pocketsphinx import LiveSpeech
@@ -29,11 +30,18 @@ class MiniApp(QtWidgets.QMainWindow):
         self.translate_window_to_start()
 
         self.mini_ui.Button_Recognize.clicked.connect(self.show_output)
-
         self.set_window_flags()
+        self.mini_ui.mini_app_back.clicked.connect(self.change_active_app)
 
         self.build_listener()
         self.redraw()
+
+    def change_active_app(self):
+        self.hide()
+        self.app.show()
+
+    def pass_info(self, app):
+        self.app = app
 
     def redraw(self):
         self.timer = QtCore.QTimer()
@@ -47,13 +55,20 @@ class MiniApp(QtWidgets.QMainWindow):
     def make_button_round(self):
         self.mini_ui.Button_Recognize.setMask(
             QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
-        self.button_image = 'background-image: url("Application/Source/Icons/mini_app_button_icon.svg");' + \
-                            'background-repeat: no-repeat; background-position: center; border: 10px solid '
+
+        self.blue_button = 'background-image: url("Application/Source/Icons/button_blue.png");' + \
+                            'background-repeat: no-repeat; background-position: center;'
+        self.yellow_button = 'background-image: url("Application/Source/Icons/button_yellow.png");' + \
+                            'background-repeat: no-repeat; background-position: center;'
+        self.red_button = 'background-image: url("Application/Source/Icons/button_red.png");' + \
+                            'background-repeat: no-repeat; background-position: center;'
+        self.green_button = 'background-image: url("Application/Source/Icons/button_green.png");' + \
+                            'background-repeat: no-repeat; background-position: center;'
 
     def translate_window_to_start(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
                          self.mini_ui.Button_Recognize.width() + 10, self.height())
-        self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#FFFFFF;')
+        self.mini_ui.Button_Recognize.setStyleSheet(self.blue_button)
         self.mini_ui.Button_Recognize.setEnabled(True)
 
     def translate_window_for_text(self):
@@ -61,7 +76,7 @@ class MiniApp(QtWidgets.QMainWindow):
                          self.standart_width, self.height())
 
     def set_button_to_waiting_mode(self):
-        self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#FFFF00;')
+        self.mini_ui.Button_Recognize.setStyleSheet(self.yellow_button)
         self.mini_ui.Button_Recognize.setEnabled(False)
         self.mini_ui.Button_Recognize.repaint()
 
@@ -76,10 +91,10 @@ class MiniApp(QtWidgets.QMainWindow):
         self.set_button_to_waiting_mode()
         try:
             command = recognize_and_execute(self.modules)
-            self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#32B232;')
+            self.mini_ui.Button_Recognize.setStyleSheet(self.green_button)
         except Exception as e:
             command = e.args[0]
-            self.mini_ui.Button_Recognize.setStyleSheet(self.button_image + '#FF0000;')
+            self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
 
         self.translate_window_for_text()
         self.mini_ui.Text_RecognizedCommand.setText(command)
@@ -111,10 +126,11 @@ class MiniApp(QtWidgets.QMainWindow):
         for phrase in activation:
             print("Активационная фраза распознана")
             os.kill(pid, signal.SIGUSR1)
+            time.sleep(3)
             status.set()
 
     def set_window_flags(self):
         # stay on top.
         self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint)
         # no frame
-        # self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)

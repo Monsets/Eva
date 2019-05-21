@@ -20,7 +20,7 @@ class Ui_mini_app(object):
         self.centralwidget = QtWidgets.QWidget(mini_app)
         self.centralwidget.setObjectName("centralwidget")
         self.Button_Recognize = QtWidgets.QPushButton(self.centralwidget)
-        self.Button_Recognize.setGeometry(QtCore.QRect(5, 9, 89, 62))
+        self.Button_Recognize.setGeometry(QtCore.QRect(5, 9, 65, 65))
         self.Button_Recognize.setAutoFillBackground(False)
         self.Button_Recognize.setStyleSheet("")
         self.Button_Recognize.setText("")
@@ -33,6 +33,12 @@ class Ui_mini_app(object):
         self.Text_RecognizedCommand.setStyleSheet("border: None;")
         self.Text_RecognizedCommand.setReadOnly(True)
         self.Text_RecognizedCommand.setObjectName("Text_RecognizedCommand")
+        self.mini_app_back = QtWidgets.QPushButton(self.centralwidget)
+        self.mini_app_back.setGeometry(QtCore.QRect(0, 0, 320, 80))
+        self.mini_app_back.setObjectName("mini_app_back")
+        self.mini_app_back.raise_()
+        self.Button_Recognize.raise_()
+        self.Text_RecognizedCommand.raise_()
         mini_app.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(mini_app)
@@ -41,3 +47,6 @@ class Ui_mini_app(object):
     def retranslateUi(self, mini_app):
         _translate = QtCore.QCoreApplication.translate
         mini_app.setWindowTitle(_translate("mini_app", "MainWindow"))
+        self.mini_app_back.setText(_translate("mini_app", "PushButton"))
+
+

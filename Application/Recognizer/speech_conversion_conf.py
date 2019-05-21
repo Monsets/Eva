@@ -24,5 +24,5 @@ background_config = {
 activation_config = {
     'lm': False,
     'keyphrase': 'eva',
-    'kws_threshold': 1e-14,
+    'kws_threshold': 1e-13,
 }
