@@ -9,7 +9,6 @@ from Application.modules import init_modules
 import os
 
 def main():
-    print(os.path.dirname(os.path.abspath(__file__)))
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
     modules = init_modules('Modules')
     mini_app = MiniApp(modules)

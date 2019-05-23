@@ -101,7 +101,6 @@ class MiniApp(QtWidgets.QMainWindow):
         self.set_button_to_normal_mode()
 
     def build_listener(self):
-        print("go")
         """ Creating an object for command """
         # background = LiveSpeech(**sc.background_config)
 
@@ -113,7 +112,6 @@ class MiniApp(QtWidgets.QMainWindow):
         signal.signal(signal.SIGUSR1, self.handler)
 
         pid = os.getpid()
-        print(pid)
 
         activation_thread = threading.Thread(name='wait_activ_phrase', target=self.processing_activation_phrase,
                                              args=(activation, status, pid))
@@ -121,7 +119,6 @@ class MiniApp(QtWidgets.QMainWindow):
         activation_thread.start()
 
     def processing_activation_phrase(self, activation, status, pid):
-        print("start activ")
 
         for phrase in activation:
             print("Активационная фраза распознана")

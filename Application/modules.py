@@ -60,14 +60,19 @@ class Modules():
 
         return None
 
-    def __command_in_module(self, command, module):
+    def __command_in_module(self, text, module):
         keys = [x.lower() for x in module.commands.keys()]
-        if command in keys:
-            return module.commands[command]
-        return None
+        command = [i.lower() for i in text.split(' ')]
+        params = []
 
-    def __parse_command(self, command, module_command):
-        return ''
+        for i in range(len(command) + 1):
+            print(' '.join(command))
+            if ' '.join(command) in keys:
+                return module.commands[' '.join(command)], ' '.join(params)
+            if len(command) > 0:
+                params.insert(0, command.pop())
+
+        return None, None
 
     def get_command_params(self, command):
         '''find command in modules and get its path and args'''
@@ -80,12 +85,9 @@ class Modules():
             if module == None:
                 continue
             # actual command
-            module_command = self.__command_in_module(command, module)
+            module_command, args = self.__command_in_module(command, module)
             if module_command == None:
                 continue
-
-            args = self.__parse_command(command, module_command)
-
             return os.path.join(module.module_path, module_command['path']), args
 
         return None

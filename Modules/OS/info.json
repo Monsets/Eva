@@ -1,7 +1,7 @@
 {
   "module_name": "OS",
   "module_ver": "0.1",
-  "app_name": "Desktop",
+  "app_name": "nautilus-desktop",
   "commands": {
     "Изменить Громкость": {
       "path": "/Modules/OS/changeVolume.py",
@@ -32,7 +32,7 @@
       "path": "moveFile.py",
       "Параметры": "имя перемещаемого файла, директория назначения"
     },
-    "Открыть файл": {
+    "Открыть": {
       "path": "openFile.py",
       "Параметры": "имя файла"
     },
