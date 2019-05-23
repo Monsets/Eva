@@ -1,4 +1,5 @@
 import unittest
+import os, subprocess
 
 from PyQt5.QtCore import QSettings
 
@@ -6,6 +7,9 @@ from PyQt5.QtCore import QSettings
 class SettingsEva:
     global settings
     settings = QSettings()
+
+    micVol = settings.value("slider_micro")
+    fontVal = settings.value("slider_font")
 
     """-------Сохранение настроек микшера громкости микрофона-------"""
 
@@ -20,7 +24,9 @@ class SettingsEva:
 
     def save_slider_micro(self, value):
         settings.setValue("slider_micro", value)
+        micVol = value
         settings.sync()
+        os.system('pactl set-source-volume 1 ' + str(value * 1000))  # set micro volume on system
         print("slider_micro_value_saving = ", value)
 
     """-------Сохранение состояния чекбокса "Горячая клавиша"-------"""
@@ -69,6 +75,7 @@ class SettingsEva:
 
     def save_slider_font(self, value):
         settings.setValue("slider_font", value)
+        fontVal = value
         settings.sync()
         print("slider_font_value_saving = ", value)
 
