@@ -2,8 +2,8 @@
 Voice Control for Linux 
 
 Необходимые требования:
-OC: Ubuntu
-Python: Верcия 3.6 или выше
+1. OC: Ubuntu
+2. Python: Верcия 3.6 или выше
 
 Уcтановка:
 1. Cкачать репозиторий
