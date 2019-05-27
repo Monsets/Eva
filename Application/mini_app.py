@@ -13,8 +13,6 @@ from Application.mini_app_gen_design import Ui_mini_app
 
 class MiniApp(QtWidgets.QMainWindow):
     def __init__(self, modules):
-        # Это здесь нужно для доступа к переменным, методам
-        # и т.д. в файле generated_design.py
         super().__init__()
         self.mini_ui = Ui_mini_app()
         self.mini_ui.setupUi(self)
@@ -37,33 +35,46 @@ class MiniApp(QtWidgets.QMainWindow):
         self.redraw()
 
     def change_active_app(self):
+        '''
+        Hides mini-app and shows main app
+        '''
         self.hide()
         self.app.show()
 
     def pass_info(self, app):
+        '''
+        Retrieves reference to main app
+        Params:
+            app - main app instance
+        '''
         self.app = app
 
     def redraw(self):
+        '''
+        Endless loop for refreshing app. Used for handling signal of activation word.
+        '''
         self.timer = QtCore.QTimer()
         self.timer.setSingleShot(True)
         self.timer.timeout.connect(self.redraw)
         self.timer.start(100)
 
     def handler(self, signum, frame):
+        '''
+
+        '''
         self.show_output()
 
     def make_button_round(self):
         self.mini_ui.Button_Recognize.setMask(
             QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
 
-        self.blue_button = 'background-image: url("Application/Source/Icons/button_blue.png");' + \
+        template = 'background-image: url("Application/Source/Icons/{}");' + \
                             'background-repeat: no-repeat; background-position: center;'
-        self.yellow_button = 'background-image: url("Application/Source/Icons/button_yellow.png");' + \
-                            'background-repeat: no-repeat; background-position: center;'
-        self.red_button = 'background-image: url("Application/Source/Icons/button_red.png");' + \
-                            'background-repeat: no-repeat; background-position: center;'
-        self.green_button = 'background-image: url("Application/Source/Icons/button_green.png");' + \
-                            'background-repeat: no-repeat; background-position: center;'
+
+        self.blue_button = template.format('button_blue.png')
+        self.yellow_button = template.format('button_yellow.png')
+        self.red_button = template.format('button_red.png')
+        self.green_button = template.format('button_green.png')
 
     def translate_window_to_start(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
@@ -95,6 +106,7 @@ class MiniApp(QtWidgets.QMainWindow):
         except Exception as e:
             command = e.args[0]
             self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
+            self.set_button_to_normal_mode()
 
         self.translate_window_for_text()
         self.mini_ui.Text_RecognizedCommand.setText(command)

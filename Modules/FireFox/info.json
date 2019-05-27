@@ -1,7 +1,7 @@
 {
   "module_name": "FireFox",
   "module_ver": "1.0",
-  "app_name": "firefox",
+  "app_name": "Firefox",
   "commands": {
     "Новая вкладка": {
       "path": "newPage.py",
