@@ -90,7 +90,7 @@ class Modules():
             #else last word of text to args
             if len(command) > 0:
                 params.insert(0, command.pop())
-        #if no command was found return None
+        #if no command was found rmeteturn None
         return None, None
 
     def get_command_params(self, text):
@@ -104,7 +104,6 @@ class Modules():
         '''
         #get current apps
         window_names = self.__get_active_windows()
-
         for window in window_names:
             #get module
             module = self.__find_module(window)
