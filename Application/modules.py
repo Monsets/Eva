@@ -110,7 +110,7 @@ def install_package(package_name):
 
 def __is_json(filename):
     filename, file_extenstion = os.path.splitext(filename)
-    if file_extenstion == 'info.json':
+    if file_extenstion == '.json':
         return True
     return False
 
