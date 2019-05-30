@@ -126,7 +126,9 @@ class Modules():
             args - args which passed through command line
         '''
         print("DEBUG: path to script: {} args: {}".format(path, args))
-        subprocess.Popen([path, args])
+        python_bin = "env/bin/python"
+
+        subprocess.Popen([python_bin, path, args])
 
 
 def install_package(package_name):
