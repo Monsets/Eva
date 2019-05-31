@@ -42,7 +42,7 @@ class MiniApp(QtWidgets.QMainWindow):
         '''
         Hides mini-app and shows main app
         '''
-        self.hide()
+        #self.hide()
         self.app.show()
 
     def pass_info(self, app):
