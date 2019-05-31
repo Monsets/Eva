@@ -6,7 +6,7 @@ from PyQt5.QtCore import QSettings
 class SettingsEva:
     global settings
     settings = QSettings()
-
+    test = 1
     micVol = settings.value("slider_micro")
     fontVal = settings.value("slider_font")
     ToggleSlider_SoundNotify_val = settings.value("ToggleSlider_SoundNotify")
