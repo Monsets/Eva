@@ -16,8 +16,8 @@ def recognize_and_execute(modules):
     try:
         path, args = modules.get_command_params(text)
     except:
-        print("Команда не найдена!")
-        raise ModuleNotFoundError("Команда не найдена")
+        print("Команда {} не найдена!".format(text))
+        raise ModuleNotFoundError("Команда {} не найдена".format(text))
 
     try:
         modules.execute_script(path, args)

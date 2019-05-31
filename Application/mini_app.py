@@ -96,6 +96,7 @@ class MiniApp(QtWidgets.QMainWindow):
         QtCore.QTimer().singleShot(2000,  self.translate_window_to_start)
 
     def show_output(self):
+        self.__is_working = True
         self.set_button_to_waiting_mode()
         try:
             command = recognize_and_execute(self.modules)
@@ -130,7 +131,7 @@ class MiniApp(QtWidgets.QMainWindow):
     def processing_activation_phrase(self, activation, status, pid):
         for phrase in activation:
             if self.__is_working:
-                pass
+                continue
             self.__is_working = True
             print("Активационная фраза распознана")
             os.kill(pid, signal.SIGUSR1)
