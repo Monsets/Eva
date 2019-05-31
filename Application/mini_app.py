@@ -32,13 +32,17 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.mini_app_back.clicked.connect(self.change_active_app)
 
         self.build_listener()
+
         self.redraw()
+
+        self.__is_working = False
+
 
     def change_active_app(self):
         '''
         Hides mini-app and shows main app
         '''
-        self.hide()
+        #self.hide()
         self.app.show()
 
     def pass_info(self, app):
@@ -54,14 +58,11 @@ class MiniApp(QtWidgets.QMainWindow):
         Endless loop for refreshing app. Used for handling signal of activation word.
         '''
         self.timer = QtCore.QTimer()
-        self.timer.setSingleShot(True)
+        self.timer.setSingleShot(False)
         self.timer.timeout.connect(self.redraw)
         self.timer.start(100)
 
     def handler(self, signum, frame):
-        '''
-
-        '''
         self.show_output()
 
     def make_button_round(self):
@@ -92,13 +93,10 @@ class MiniApp(QtWidgets.QMainWindow):
         self.mini_ui.Button_Recognize.repaint()
 
     def set_button_to_normal_mode(self):
-        # resize again after 4 seconds
-        self.timer = QtCore.QTimer()
-        self.timer.setSingleShot(True)
-        self.timer.timeout.connect(self.translate_window_to_start)
-        self.timer.start(4000)
+        QtCore.QTimer().singleShot(2000,  self.translate_window_to_start)
 
     def show_output(self):
+        self.__is_working = True
         self.set_button_to_waiting_mode()
         try:
             command = recognize_and_execute(self.modules)
@@ -106,11 +104,11 @@ class MiniApp(QtWidgets.QMainWindow):
         except Exception as e:
             command = e.args[0]
             self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
-            self.set_button_to_normal_mode()
 
         self.translate_window_for_text()
         self.mini_ui.Text_RecognizedCommand.setText(command)
         self.set_button_to_normal_mode()
+        self.__is_working = False
 
     def build_listener(self):
         """ Creating an object for command """
@@ -131,11 +129,12 @@ class MiniApp(QtWidgets.QMainWindow):
         activation_thread.start()
 
     def processing_activation_phrase(self, activation, status, pid):
-
         for phrase in activation:
+            if self.__is_working:
+                continue
+            self.__is_working = True
             print("Активационная фраза распознана")
             os.kill(pid, signal.SIGUSR1)
-            time.sleep(3)
             status.set()
 
     def set_window_flags(self):

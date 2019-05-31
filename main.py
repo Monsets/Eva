@@ -13,6 +13,7 @@ def main():
     modules = init_modules('Modules')
     mini_app = MiniApp(modules)
     window = EvaApp(mini_app, modules)  # Создаём объект класса
+    mini_app.show()
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 
