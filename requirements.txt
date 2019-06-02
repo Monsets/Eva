@@ -9,3 +9,5 @@ vext==0.7.3
 vext.gi==0.7.0
 pyautogui
 xlib
+lxml
+pygame
