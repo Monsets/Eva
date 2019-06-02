@@ -1,8 +1,11 @@
 import signal
 import os
+import pygame
+from wave import open as waveOpen
+from ossaudiodev import open as ossOpen
 
 from PyQt5 import QtWidgets
-
+from lxml import etree, objectify
 from Application.generated_design import (
     Ui_MainWindow,
 )  # Это наш конвертированный файл дизайна
@@ -24,6 +27,7 @@ class EvaApp(QtWidgets.QMainWindow):
         self.modules = modules
         # Fill in module's page tabl
         self.init_modules_table()
+        self.init_history_table()
         # Save settings
         self.save_setings()
 
@@ -70,6 +74,47 @@ class EvaApp(QtWidgets.QMainWindow):
             self.ui.Button_About,
         ]
         return buttons
+
+    def init_history_table(self):
+        scroll = self.ui.ScrollArea_History
+        scroll.setWidget(self.ui.ListWidget_History)
+        history_PATH = "./Application/History/history.xml"
+
+        with open(history_PATH) as fobj:
+            xml = fobj.read()
+
+        root = etree.fromstring(xml)
+        element = ""
+        for appt in root.getchildren():
+            element = ""
+            for elem in appt.getchildren():
+                if elem.text == 'History/testID':
+                    break
+                else:
+                    text = elem.text
+                print(elem.tag + " => " + text)
+                element += elem.tag + ": "+text + "\n"
+            if elem.text != 'History/testID':
+                self.ui.ListWidget_History.addItem(element + "\n"+"___________________________________________________________________")
+        # click on item
+        self.ui.ListWidget_History.itemClicked.connect(self.play_sound)
+        # self.ui.ListWidget.itemClicked.connect(self.change_info_command)
+
+    def play_sound(self):
+        id = self.ui.ListWidget_History.currentIndex().row()
+        history_PATH = "./Application/History/history.xml"
+        with open(history_PATH) as f:
+            xml = f.read()
+        root = objectify.fromstring(xml)
+        sounds = []
+        for appt in root.getchildren():
+            sounds.append(appt.getchildren()[0])
+
+        pygame.init()
+
+        pygame.mixer.music.load(str(sounds[id+1]))
+
+        pygame.mixer.music.play()
 
     """Module page events"""
 

@@ -7,12 +7,6 @@
         <system>Google</system>
         <date>2019</date>
     </id>
-    <id ID="2">
-        <path>2</path>
-        <text>2</text>
-        <command>2</command>
-        <similarity>2</similarity>
-        <system>2</system>
-        <date>2</date>
-    </id>
-</History>
+      <id ID="0643292969c140b29e8cb928c840c5cd"><path>./Application/History/Audio/2019-06-02 12-20-07.wav</path><text>открыть терминал</text><command>wat</command><similarity>&amp;????</similarity><system>google</system><date>2019-06-02 12:20:14</date></id>
+      <id ID="ea1bec50c2844446b4bb3e5d5f29031a"><path>./Application/History/Audio/2019-06-02 12-25-57.wav</path><text>открыть Firefox</text><command>wat</command><similarity>&amp;????</similarity><system>google</system><date>2019-06-02 12:26:04</date></id>
+      </History>

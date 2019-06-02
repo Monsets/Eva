@@ -1,9 +1,11 @@
 from Application.Recognizer.speech_conversion import recognize
-
+from Application.history import History
 
 def recognize_and_execute(modules):
+    his = History()
     try:
         text = recognize()
+        his.save_params(text[0], text[2], "wat", "&????", text[1])
     except Exception as e:
         print("Error: ", e.args)
 

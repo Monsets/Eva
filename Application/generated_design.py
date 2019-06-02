@@ -96,6 +96,8 @@ class Ui_MainWindow(object):
         self.ScrollArea_History = QtWidgets.QScrollArea(self.history_page)
         self.ScrollArea_History.setWidgetResizable(True)
         self.ScrollArea_History.setObjectName("ScrollArea_History")
+        self.ListWidget_History = QtWidgets.QListWidget(self.ScrollArea_History)
+        self.ListWidget_History.setObjectName("ListWidget_History")
         self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
         self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 98, 28))
         self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")

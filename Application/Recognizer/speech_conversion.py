@@ -1,9 +1,8 @@
 import threading
 from datetime import datetime
-
+import os
 import speech_recognition as sr
 from pocketsphinx import LiveSpeech
-
 import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.check_internet import check_internet_connection
 
@@ -11,6 +10,8 @@ from Application.Recognizer.check_internet import check_internet_connection
 def recognition_google():
     """We get the command and save file"""
     date = datetime.now()
+    if not os.path.exists("./Application/History/Audio"):
+        os.makedirs("./Application/History/Audio")
     file_name = (
             "./Application/History/Audio/" + str(date)[: str(date).index(".")].replace(":", "-") + ".wav"
     )
@@ -19,10 +20,10 @@ def recognition_google():
 
     with mic as source:
         audio = r.listen(source)
-        # with open(file_name, "wb") as f:
-        #    f.write(audio.get_wav_data())
+        with open(file_name, "wb") as f:
+            f.write(audio.get_wav_data())
 
-    return r.recognize_google(audio, language="ru-RU sy")
+    return r.recognize_google(audio, language="ru-RU sy"), file_name
 
 
 def recognition_sphinx(speech, status):
@@ -40,11 +41,11 @@ def recognition_sphinx(speech, status):
 
 def recognize():
     if check_internet_connection():
-        text = recognition_google()
+        text, filename = recognition_google()
         print("GOOGLE: {}".format(text))
     else:
         return None
-    return (text, "google")
+    return (text, "google", filename)
 
 def processing_background_phrase(background, status):
     print("start back")

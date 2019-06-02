@@ -2,10 +2,10 @@ import datetime
 import uuid
 import xml.etree.ElementTree as xml
 
-PATH = "../History/"
+PATH = "./Application/History/"
 
 
-class History(object):
+class History:
     """save History."""
 
     def save_params(self, text, filename, command, similarity, system):
@@ -20,7 +20,7 @@ class History(object):
 
         self.addToXml(self.id, self.text, self.path, self.command, self.similarity, self.system, self.date)
 
-    def addToXml(self, id, text, command, filename, similarity, system, date):
+    def addToXml(self, id, text, filename, command, similarity, system, date):
         tree = xml.ElementTree(file=PATH + "history.xml")
         root = tree.getroot()
 
@@ -46,4 +46,4 @@ class History(object):
         self.date = xml.SubElement(self.id, 'date')
         self.date.text = str(date)
 
-        tree.write(PATH + "history.xml")
+        tree.write(PATH + "history.xml", encoding="utf-8")
