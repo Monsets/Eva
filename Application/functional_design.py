@@ -79,6 +79,14 @@ class EvaApp(QtWidgets.QMainWindow):
         scroll = self.ui.ScrollArea_History
         scroll.setWidget(self.ui.ListWidget_History)
         history_PATH = "./Application/History/history.xml"
+        dict_history = {
+            'path': 'Путь до файла:',
+            'text': 'Распознаный текст',
+            'command': 'Распознаная команда',
+            'similarity': 'Процент похожести',
+            'system': 'Система распознавания',
+            'date': 'Дата'
+        }
 
         with open(history_PATH) as fobj:
             xml = fobj.read()
@@ -92,10 +100,10 @@ class EvaApp(QtWidgets.QMainWindow):
                     break
                 else:
                     text = elem.text
-                print(elem.tag + " => " + text)
-                element += elem.tag + ": "+text + "\n"
+
+                element += dict_history[elem.tag] + ": "+text + "\n"
             if elem.text != 'History/testID':
-                self.ui.ListWidget_History.addItem(element + "\n"+"___________________________________________________________________")
+                self.ui.ListWidget_History.addItem(element +"___________________________________________________________________")
         # click on item
         self.ui.ListWidget_History.itemClicked.connect(self.play_sound)
         # self.ui.ListWidget.itemClicked.connect(self.change_info_command)

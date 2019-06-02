@@ -15,6 +15,8 @@ source env/bin/activate
 echo -e '\e[31mPython 3 virtual environment was created.'
 echo -e '\e[31mTo quit environment enter "deactivate" in console.\e[0m'
 
+pip3 install lxml
+pip3 install pygame
 pip3 install --upgrade pip
 pip3 install setuptools
 pip3 install -r requirements.txt 
