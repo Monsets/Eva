@@ -1,11 +1,16 @@
 import unittest
-
+import os, subprocess
 from PyQt5.QtCore import QSettings
 
 
 class SettingsEva:
     global settings
     settings = QSettings()
+    
+    micVol = settings.value("slider_micro")
+    fontVal = settings.value("slider_font")
+    ToggleSlider_SoundNotify_val = settings.value("ToggleSlider_SoundNotify")
+    ToggleSlider_TextNotify_val = settings.value("ToggleSlider_TextNotify")
 
     """-------Сохранение настроек микшера громкости микрофона-------"""
 
@@ -20,6 +25,8 @@ class SettingsEva:
     def save_slider_micro(self, value):
         settings.setValue("slider_micro", value)
         settings.sync()
+        micVol = value
+        os.system('pactl set-source-volume 1 ' + str(value * 1000))  # set micro volume on system
 
     """-------Сохранение состояния чекбокса "Горячая клавиша"-------"""
 
@@ -63,6 +70,7 @@ class SettingsEva:
         else:
             slider.setValue(int(slider_value))
             #print("slider_font_value = ", int(slider_value))
+            fontVal = value
         slider.valueChanged.connect(self.save_slider_font)
 
     def save_slider_font(self, value):
@@ -84,6 +92,7 @@ class SettingsEva:
     def save_ToggleSlider_TextNotify(self, value):
         settings.setValue("ToggleSlider_TextNotify", value)
         settings.sync()
+        ToggleSlider_TextNotify_val = value
         #print("ToggleSlider_TextNotify_value_saving = ", value)
 
     """-------Сохранение состояния чекбокса "Включить звуковое оповещение"-------"""
@@ -100,6 +109,7 @@ class SettingsEva:
     def save_ToggleSlider_SoundNotify(self, value):
         settings.setValue("ToggleSlider_SoundNotify", value)
         settings.sync()
+        ToggleSlider_SoundNotify_val = value
         #print("ToggleSlider_SoundNotify_value_saving = ", value)
 
     """-------Сохранение значения "Горячая клавиша"-------"""
