@@ -76,9 +76,12 @@ class EvaApp(QtWidgets.QMainWindow):
         return buttons
 
     """History page events"""
+
     def init_history_table(self):
         scroll = self.ui.ScrollArea_History
+        scroll.setStyleSheet('border: null')
         scroll.setWidget(self.ui.ListWidget_History)
+        self.ui.ListWidget_History.setStyleSheet('QListWidget::item { border-bottom: 1px solid black; }')
         history_PATH = "./Application/History/history.xml"
         dict_history = {
             'path': 'Путь до файла:',
@@ -86,7 +89,7 @@ class EvaApp(QtWidgets.QMainWindow):
             'command': 'Распознаная команда',
             'similarity': 'Процент сходства',
             'system': 'Система распознавания',
-            'date': 'Дата'
+            'date': 'Дата и время'
         }
 
         with open(history_PATH) as fobj:
@@ -100,16 +103,15 @@ class EvaApp(QtWidgets.QMainWindow):
                     break
                 else:
                     text = elem.text
-                element += dict_history[elem.tag] + ": "+text + "\n"
-
+                element += dict_history[elem.tag] + ": " + text + "\n"
             if elem.text != 'History/testID':
-                self.ui.ListWidget_History.addItem(element +"___________________________________________________________________")
+                self.ui.ListWidget_History.addItem(element)
         # click on item
         self.ui.ListWidget_History.itemClicked.connect(self.play_sound)
 
     def play_sound(self):
         rowId = self.ui.ListWidget_History.currentIndex().row()
-        HISTORY_PATH= "./Application/History/history.xml"
+        HISTORY_PATH = "./Application/History/history.xml"
         with open(HISTORY_PATH) as f:
             xml = f.read()
         root = objectify.fromstring(xml)
@@ -117,7 +119,7 @@ class EvaApp(QtWidgets.QMainWindow):
         for appt in root.getchildren():
             sounds.append(appt.getchildren()[0])
         pygame.init()
-        pygame.mixer.music.load(str(sounds[rowId+1]))
+        pygame.mixer.music.load(str(sounds[rowId + 1]))
         pygame.mixer.music.play()
 
     """Module page events"""
