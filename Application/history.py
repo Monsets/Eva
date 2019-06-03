@@ -50,6 +50,7 @@ class History:
         tree.write(PATH + "history.xml", encoding="utf-8")
 
     def init_file(self):
+        os.mkdir(PATH)
         test = '<History>\n' \
                '<id ID="testID">\n' \
                '<path>History/testID</path>\n' \
