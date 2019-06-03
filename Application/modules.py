@@ -52,8 +52,6 @@ class Modules():
 
         window_names.reverse()
 
-        print(window_names)
-
         return window_names
 
     def __find_module(self, window_name):
