@@ -30,4 +30,4 @@ def recognize_and_execute(modules):
         raise PermissionError("Нет прав для выполнения скрипта")
 
 
-    return text
+    return text[0]
