@@ -28,4 +28,6 @@ def recognize_and_execute(modules):
     except PermissionError:
         print("Нет прав для выполнения скрипта")
         raise PermissionError("Нет прав для выполнения скрипта")
-    return text
+
+
+    return text[0]

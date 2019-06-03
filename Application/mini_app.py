@@ -104,9 +104,8 @@ class MiniApp(QtWidgets.QMainWindow):
         except Exception as e:
             command = e.args[0]
             self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
-
         self.translate_window_for_text()
-        #self.mini_ui.Text_RecognizedCommand.setText(command)
+        self.mini_ui.Text_RecognizedCommand.setText(command)
         self.set_button_to_normal_mode()
         self.__is_working = False
 

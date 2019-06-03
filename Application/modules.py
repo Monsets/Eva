@@ -127,7 +127,6 @@ class Modules():
         '''
         print("DEBUG: path to script: {} args: {}".format(path, args))
         python_bin = "env/bin/python"
-
         subprocess.Popen([python_bin, path, args])
 
 

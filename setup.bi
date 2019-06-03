@@ -7,6 +7,7 @@ sudo apt-get install libpulse-dev
 sudo apt-get install libasound2-dev
 sudo apt-get install python3-dev build-essential
 sudo apt-get install portaudio19-dev
+sudo apt-get install wmctrl
 
 python3 -m venv env
 
