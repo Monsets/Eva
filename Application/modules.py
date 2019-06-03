@@ -52,6 +52,8 @@ class Modules():
 
         window_names.reverse()
 
+        print(window_names)
+
         return window_names
 
     def __find_module(self, window_name):
@@ -127,7 +129,6 @@ class Modules():
         '''
         print("DEBUG: path to script: {} args: {}".format(path, args))
         python_bin = "env/bin/python"
-
         subprocess.Popen([python_bin, path, args])
 
 
