@@ -10,7 +10,7 @@ from Application.generated_design import (
     Ui_MainWindow,
 )  # Это наш конвертированный файл дизайна
 from Application.settingsEva import SettingsEva
-
+from Application.history import History
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self, mini_app, modules):
@@ -78,11 +78,13 @@ class EvaApp(QtWidgets.QMainWindow):
     """History page events"""
 
     def init_history_table(self):
+        history_PATH = "./Application/History/history.xml"
+        if not os.path.exists(history_PATH):
+            History.init_file(self)
         scroll = self.ui.ScrollArea_History
         scroll.setStyleSheet('border: null')
         scroll.setWidget(self.ui.ListWidget_History)
-        self.ui.ListWidget_History.setStyleSheet('QListWidget::item { border-bottom: 1px solid black; }')
-        history_PATH = "./Application/History/history.xml"
+        #self.ui.ListWidget_History.setStyleSheet('QListWidget::item { border-bottom: 1px }')
         dict_history = {
             'path': 'Путь до файла:',
             'text': 'Распознаный текст',
@@ -105,7 +107,8 @@ class EvaApp(QtWidgets.QMainWindow):
                     text = elem.text
                 element += dict_history[elem.tag] + ": " + text + "\n"
             if elem.text != 'History/testID':
-                self.ui.ListWidget_History.addItem(element)
+
+                self.ui.ListWidget_History.addItem(element+"\n")
         # click on item
         self.ui.ListWidget_History.itemClicked.connect(self.play_sound)
 

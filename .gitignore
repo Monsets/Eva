@@ -4,3 +4,5 @@
 env/
 
 Application/History/history\.xml
+
+Application/History/Audio/

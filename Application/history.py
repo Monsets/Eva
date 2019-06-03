@@ -1,7 +1,7 @@
 import datetime
 import uuid
 import xml.etree.ElementTree as xml
-
+import os
 PATH = "./Application/History/"
 
 
@@ -16,10 +16,11 @@ class History:
         self.path = filename
         self.id = uuid.uuid4().hex
         now = datetime.datetime.now()
+        if not os.path.exists(PATH+"history.xml"):
+            self.init_file()
         self.date = now.strftime("%Y-%m-%d %H:%M:%S")
 
-        self.addToXml(self.id, self.text, self.path, self.command, self.similarity, self.system, self.date)
-
+        self.addToXml(self.id,self.text,self.path, self.command, self.similarity, self.system, self.date)
     def addToXml(self, id, text, filename, command, similarity, system, date):
         tree = xml.ElementTree(file=PATH + "history.xml")
         root = tree.getroot()
@@ -47,3 +48,18 @@ class History:
         self.date.text = str(date)
 
         tree.write(PATH + "history.xml", encoding="utf-8")
+
+    def init_file(self):
+        test = '<History>\n' \
+               '<id ID="testID">\n' \
+               '<path>History/testID</path>\n' \
+               '<text>texttest</text>\n' \
+               '<command>"testCOmand"</command>\n' \
+               ' <similarity>20</similarity>\n' \
+               '<system>Google</system>\n' \
+               '<date>2019</date>\n' \
+               '</id>\n' \
+               '</History>\n'
+        fd = open(PATH + "history.xml", "w+")
+        fd.write(test)
+        fd.close()
