@@ -8,13 +8,13 @@ from pocketsphinx import LiveSpeech
 
 import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.text_to_command import recognize_and_execute
-from Application.mini_app_gen_design import Ui_mini_app
+from Application.mini_app_gen_design import Ui_eva
 
 
 class MiniApp(QtWidgets.QMainWindow):
     def __init__(self, modules):
         super().__init__()
-        self.mini_ui = Ui_mini_app()
+        self.mini_ui = Ui_eva()
         self.mini_ui.setupUi(self)
 
         self.modules = modules
