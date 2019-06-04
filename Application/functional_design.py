@@ -5,12 +5,46 @@ from wave import open as waveOpen
 from ossaudiodev import open as ossOpen
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QHBoxLayout, QWidget, QLabel, QPushButton, QListWidgetItem, QGridLayout, QTableWidget, \
+    QVBoxLayout
 from lxml import etree, objectify
 from Application.generated_design import (
     Ui_MainWindow,
 )  # Это наш конвертированный файл дизайна
 from Application.settingsEva import SettingsEva
 from Application.history import History
+
+
+class CustomQWidget(QWidget):
+    def __init__(self, path,text,command,method,system,date):
+        #super(CustomQWidget, self).__init__(parent)
+        QWidget.__init__(self)
+        self.path = QLabel("Путь до файла: "+str(path))
+        self.path.setMaximumSize(600,100)
+        self.text = QLabel("Распознаный текст: "+str(text))
+        self.command = QLabel("Распознаная команда: "+str(command))
+        if command == "Команда не найдена!":
+            self.command.setStyleSheet("background: #FF756B")
+        elif command == "Речь не распознана":
+            self.command.setStyleSheet("background: red")
+        else:
+            self.command.setStyleSheet("background: #45D09E")
+        self.method = QLabel("Способ активации: "+str(method))
+        self.system = QLabel("Система распознавния: "+str(system))
+        self.date = QLabel("Дата и время: "+str(date))
+
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.command)
+        layout.addWidget(self.path)
+        layout.addWidget(self.text)
+        layout.addWidget(self.method)
+        layout.addWidget(self.system)
+        layout.addWidget(self.date)
+
+        self.setLayout(layout)
+
 
 class EvaApp(QtWidgets.QMainWindow):
     def __init__(self, mini_app, modules):
@@ -84,31 +118,45 @@ class EvaApp(QtWidgets.QMainWindow):
         scroll = self.ui.ScrollArea_History
         scroll.setStyleSheet('border: null')
         scroll.setWidget(self.ui.ListWidget_History)
-        #self.ui.ListWidget_History.setStyleSheet('QListWidget::item { border-bottom: 1px }')
-        dict_history = {
-            'path': 'Путь до файла:',
-            'text': 'Распознаный текст',
-            'command': 'Распознаная команда',
-            'similarity': 'Процент сходства',
-            'system': 'Система распознавания',
-            'date': 'Дата и время'
-        }
+        list = self.ui.ListWidget_History
+
+        self.ui.ListWidget_History.setStyleSheet('QListWidget::item { border: 1px solid; margin-bottom: 1px   }')
+        list.setMinimumWidth(list.sizeHintForColumn(0))
 
         with open(history_PATH) as fobj:
             xml = fobj.read()
         root = etree.fromstring(xml)
         element = ""
+#        row = CustomQWidget()
         for appt in root.getchildren():
-            element = ""
+            pathf = ""
+            textf = ""
+            commandf =""
+            methodf = ""
+            systemf = ""
+            datef = ""
+            row = None
             for elem in appt.getchildren():
                 if elem.text == 'History/testID':
                     break
                 else:
-                    text = elem.text
-                element += dict_history[elem.tag] + ": " + text + "\n"
+                    if elem.tag == "path":
+                        pathf = elem.text
+                    elif elem.tag == "text":
+                        textf = elem.text
+                    elif elem.tag == "command":
+                        commandf = elem.text
+                    elif elem.tag == "method":
+                        methodf = elem.text
+                    elif elem.tag == "system":
+                        systemf = elem.text
+                    elif elem.tag == "date":
+                        datef = elem.text
+                row = CustomQWidget(pathf,textf,commandf,methodf,systemf,datef)
             if elem.text != 'History/testID':
-
-                self.ui.ListWidget_History.addItem(element+"\n")
+                item = QListWidgetItem(list)
+                item.setSizeHint(row.minimumSizeHint())
+                list.setItemWidget(item, row)
         # click on item
         self.ui.ListWidget_History.itemClicked.connect(self.play_sound)
 

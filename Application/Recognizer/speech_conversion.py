@@ -5,7 +5,7 @@ import speech_recognition as sr
 from pocketsphinx import LiveSpeech
 import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.check_internet import check_internet_connection
-
+from Application.settingsEva import SettingsEva
 
 def recognition_google():
     """We get the command and save file"""
@@ -40,12 +40,15 @@ def recognition_sphinx(speech, status):
 
 
 def recognize():
+    set = SettingsEva()
+    met = set.get_method()
     if check_internet_connection():
         text, filename = recognition_google()
         print("GOOGLE: {}".format(text))
+        system = "google"
     else:
         return None
-    return (text, "google", filename)
+    return (text, system, filename,met)
 
 def processing_background_phrase(background, status):
     print("start back")

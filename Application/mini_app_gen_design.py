@@ -9,15 +9,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_mini_app(object):
-    def setupUi(self, mini_app):
-        mini_app.setObjectName("mini_app")
-        mini_app.resize(320, 80)
-        mini_app.setMinimumSize(QtCore.QSize(3, 0))
-        mini_app.setStyleSheet("background-color: white;")
-        mini_app.setDockNestingEnabled(False)
-        mini_app.setUnifiedTitleAndToolBarOnMac(False)
-        self.centralwidget = QtWidgets.QWidget(mini_app)
+class Ui_eva(object):
+    def setupUi(self, eva):
+        eva.setObjectName("eva")
+        eva.resize(320, 80)
+        eva.setMinimumSize(QtCore.QSize(3, 0))
+        eva.setStyleSheet("background-color: white;")
+        eva.setDockNestingEnabled(False)
+        eva.setUnifiedTitleAndToolBarOnMac(False)
+        self.centralwidget = QtWidgets.QWidget(eva)
         self.centralwidget.setObjectName("centralwidget")
         self.Button_Recognize = QtWidgets.QPushButton(self.centralwidget)
         self.Button_Recognize.setGeometry(QtCore.QRect(5, 9, 65, 65))
@@ -39,14 +39,14 @@ class Ui_mini_app(object):
         self.mini_app_back.raise_()
         self.Button_Recognize.raise_()
         self.Text_RecognizedCommand.raise_()
-        mini_app.setCentralWidget(self.centralwidget)
+        eva.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(mini_app)
-        QtCore.QMetaObject.connectSlotsByName(mini_app)
+        self.retranslateUi(eva)
+        QtCore.QMetaObject.connectSlotsByName(eva)
 
-    def retranslateUi(self, mini_app):
+    def retranslateUi(self, eva):
         _translate = QtCore.QCoreApplication.translate
-        mini_app.setWindowTitle(_translate("mini_app", "MainWindow"))
-        self.mini_app_back.setText(_translate("mini_app", "PushButton"))
+        eva.setWindowTitle(_translate("eva", "Eva"))
+        self.mini_app_back.setText(_translate("eva", "PushButton"))
 
 

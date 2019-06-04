@@ -6,11 +6,18 @@ from PyQt5.QtCore import QSettings
 class SettingsEva:
     global settings
     settings = QSettings()
-
     micVol = settings.value("slider_micro")
     fontVal = settings.value("slider_font")
     ToggleSlider_SoundNotify_val = settings.value("ToggleSlider_SoundNotify")
     ToggleSlider_TextNotify_val = settings.value("ToggleSlider_TextNotify")
+
+
+    def save_method(self, val):
+        settings.setValue("activate_method", val)
+
+    def get_method(self):
+        activate_method = settings.value("activate_method")
+        return activate_method
 
     """-------Сохранение настроек микшера громкости микрофона-------"""
 

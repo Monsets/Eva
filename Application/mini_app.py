@@ -8,8 +8,8 @@ from pocketsphinx import LiveSpeech
 
 import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.text_to_command import recognize_and_execute
-from Application.mini_app_gen_design import Ui_mini_app
-
+from Application.mini_app_gen_design import Ui_eva as Ui_mini_app
+from Application.settingsEva import SettingsEva
 
 class MiniApp(QtWidgets.QMainWindow):
     def __init__(self, modules):
@@ -27,7 +27,7 @@ class MiniApp(QtWidgets.QMainWindow):
         self.screen_size = QtWidgets.QDesktopWidget().screenGeometry(-1)
         self.translate_window_to_start()
 
-        self.mini_ui.Button_Recognize.clicked.connect(self.show_output)
+        self.mini_ui.Button_Recognize.clicked.connect(self.show_output0)
         self.set_window_flags()
         self.mini_ui.mini_app_back.clicked.connect(self.change_active_app)
 
@@ -63,7 +63,7 @@ class MiniApp(QtWidgets.QMainWindow):
         self.timer.start(100)
 
     def handler(self, signum, frame):
-        self.show_output()
+        self.show_output1()
 
     def make_button_round(self):
         self.mini_ui.Button_Recognize.setMask(
@@ -95,10 +95,28 @@ class MiniApp(QtWidgets.QMainWindow):
     def set_button_to_normal_mode(self):
         QtCore.QTimer().singleShot(2000,  self.translate_window_to_start)
 
-    def show_output(self):
+    def show_output1(self):
         self.__is_working = True
         self.set_button_to_waiting_mode()
         try:
+            set = SettingsEva()
+            set.save_method(1)
+            command = recognize_and_execute(self.modules)
+            self.mini_ui.Button_Recognize.setStyleSheet(self.green_button)
+        except Exception as e:
+            command = e.args[0]
+            self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
+        self.translate_window_for_text()
+        self.mini_ui.Text_RecognizedCommand.setText(command)
+        self.set_button_to_normal_mode()
+        self.__is_working = False
+
+    def show_output0(self):
+        self.__is_working = True
+        self.set_button_to_waiting_mode()
+        try:
+            set = SettingsEva()
+            set.save_method(0)
             command = recognize_and_execute(self.modules)
             self.mini_ui.Button_Recognize.setStyleSheet(self.green_button)
         except Exception as e:

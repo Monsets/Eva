@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
         MainWindow.resize(699, 542)
-        MainWindow.setMinimumSize(QtCore.QSize(699, 542))
+        MainWindow.setMinimumSize(QtCore.QSize(750, 542))
         MainWindow.setStyleSheet("background-color: rgb(65,105,225)")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

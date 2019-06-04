@@ -8,10 +8,13 @@ PATH = "./Application/History/"
 class History:
     """save History."""
 
-    def save_params(self, text, filename, command, similarity, system):
+    def save_params(self, text, filename, command, method, system):
         self.command = command
         self.text = text
-        self.similarity = similarity
+        if method == 0:
+            self.method = "кнопка"
+        else:
+            self.method = "голос"
         self.system = system
         self.path = filename
         self.id = uuid.uuid4().hex
@@ -20,8 +23,8 @@ class History:
             self.init_file()
         self.date = now.strftime("%Y-%m-%d %H:%M:%S")
 
-        self.addToXml(self.id,self.text,self.path, self.command, self.similarity, self.system, self.date)
-    def addToXml(self, id, text, filename, command, similarity, system, date):
+        self.addToXml(self.id,self.text,self.path, self.command, self.method, self.system, self.date)
+    def addToXml(self, id, text, filename, command, method, system, date):
         tree = xml.ElementTree(file=PATH + "history.xml")
         root = tree.getroot()
 
@@ -38,8 +41,8 @@ class History:
         self.command = xml.SubElement(self.id, 'command')
         self.command.text = str(command)
 
-        self.similarity = xml.SubElement(self.id, 'similarity')
-        self.similarity.text = str(similarity)
+        self.method = xml.SubElement(self.id, 'method')
+        self.method.text = str(method)
 
         self.system = xml.SubElement(self.id, 'system')
         self.system.text = str(system)
@@ -57,7 +60,7 @@ class History:
                '<path>History/testID</path>\n' \
                '<text>texttest</text>\n' \
                '<command>"testCOmand"</command>\n' \
-               ' <similarity>20</similarity>\n' \
+               '<method>20</method>\n' \
                '<system>Google</system>\n' \
                '<date>2019</date>\n' \
                '</id>\n' \
