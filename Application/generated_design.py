@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from Application.settingsEva import SettingsEva
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -166,15 +166,18 @@ class Ui_MainWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
         self.label_2 = QtWidgets.QLabel(self.setting_micro_page)
         self.label_2.setStyleSheet("color: rgb(65,105,225);")
-        self.label_2.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignHCenter)
+        self.label_2.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 1, 1)
         self.Slider_Micro_Volume = QtWidgets.QSlider(self.setting_micro_page)
         self.Slider_Micro_Volume.setOrientation(QtCore.Qt.Horizontal)
         self.Slider_Micro_Volume.setObjectName("Slider_Micro_Volume")
         self.gridLayout.addWidget(self.Slider_Micro_Volume, 1, 1, 1, 1)
+
+
         self.verticalLayout_4.addLayout(self.gridLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -220,6 +223,20 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addLayout(self.gridLayout_2)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+
+        self.label_tws = QtWidgets.QLabel(self.setting_micro_page)
+        self.label_tws.setStyleSheet("color: rgb(65,105,225);")
+        self.label_tws.setAlignment(QtCore.Qt.AlignBottom)
+        self.label_tws.setObjectName("label_tws")
+        self.horizontalLayout_3.addWidget(self.label_tws)
+
+        self.Slider_Micro_Kws_Threshold = QtWidgets.QSlider(self.setting_micro_page)
+        self.Slider_Micro_Kws_Threshold.setOrientation(QtCore.Qt.Horizontal)
+        self.Slider_Micro_Kws_Threshold.setMaximum(50)
+        self.Slider_Micro_Kws_Threshold.setSingleStep(5)
+        self.Slider_Micro_Kws_Threshold.setObjectName("Slider_Micro_Kws_Threshold")
+        self.horizontalLayout_3.addWidget(self.Slider_Micro_Kws_Threshold)
+
         self.verticalLayout_4.addLayout(self.horizontalLayout_3)
         self.stackedWidget.addWidget(self.setting_micro_page)
         self.settings_notification_page = QtWidgets.QWidget()
@@ -263,6 +280,7 @@ class Ui_MainWindow(object):
         self.ToggleSlider_TextNotify.setOrientation(QtCore.Qt.Horizontal)
         self.ToggleSlider_TextNotify.setObjectName("ToggleSlider_TextNotify")
         self.gridLayout_3.addWidget(self.ToggleSlider_TextNotify, 0, 1, 1, 1)
+
         self.stackedWidget.addWidget(self.settings_notification_page)
         self.settings_interface_page = QtWidgets.QWidget()
         self.settings_interface_page.setObjectName("settings_interface_page")
@@ -326,6 +344,7 @@ class Ui_MainWindow(object):
         self.label_10.setText(_translate("MainWindow", "Модуль"))
         self.label.setText(_translate("MainWindow", "Выберите микрофон"))
         self.label_2.setText(_translate("MainWindow", "Громкость микрофона"))
+        self.label_tws.setText(_translate("MainWindow", "Порог распознавания: 1e-"+SettingsEva.twsVol))
         self.Button_Check_Micro.setText(_translate("MainWindow", "Проверка микрофона"))
         self.label_4.setText(_translate("MainWindow", "Горячая клавиша"))
         self.label_3.setText(_translate("MainWindow", "Режим работы"))
@@ -336,5 +355,3 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Включить звуковое оповещение"))
         self.label_7.setText(_translate("MainWindow", "Размер шрифта"))
         self.label_8.setText(_translate("MainWindow", "Здесь может быть ваша реклама. (8-800-555-35-35)"))
-
-

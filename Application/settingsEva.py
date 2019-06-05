@@ -1,12 +1,11 @@
 import unittest
 import os, subprocess
 from PyQt5.QtCore import QSettings
-
-
 class SettingsEva:
     global settings
     settings = QSettings()
     micVol = settings.value("slider_micro")
+    twsVol = settings.value("Slider_Micro_Kws_Threshold")
     fontVal = settings.value("slider_font")
     ToggleSlider_SoundNotify_val = settings.value("ToggleSlider_SoundNotify")
     ToggleSlider_TextNotify_val = settings.value("ToggleSlider_TextNotify")
@@ -18,6 +17,22 @@ class SettingsEva:
     def get_method(self):
         activate_method = settings.value("activate_method")
         return activate_method
+
+    """-------Сохранение настроек микшера порога микрофона-------"""
+
+    def Slider_Micro_Kws_Threshold(self, slider_micro):
+        slider_value = settings.value("Slider_Micro_Kws_Threshold")
+        if slider_value is None:
+            slider_micro.setValue(15)
+        else:
+            slider_micro.setValue(int(slider_value))
+        slider_micro.valueChanged.connect(self.save_Slider_Micro_Kws_Threshold)
+
+    def save_Slider_Micro_Kws_Threshold(self, value):
+        settings.setValue("Slider_Micro_Kws_Threshold", value)
+        settings.sync()
+        twsVol = value
+        #os.system('pactl set-source-volume 1 ' + str(value * 1000))  # set micro volume on system
 
     """-------Сохранение настроек микшера громкости микрофона-------"""
 

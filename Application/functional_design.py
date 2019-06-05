@@ -97,6 +97,13 @@ class EvaApp(QtWidgets.QMainWindow):
 
         self.settingsEva.HotKey_Choosen(self.ui.HotKey_Choosen)
 
+        self.settingsEva.Slider_Micro_Kws_Threshold(self.ui.Slider_Micro_Kws_Threshold)
+
+        self.ui.Slider_Micro_Kws_Threshold.valueChanged.connect(self.chg_tws)
+
+    def chg_tws(self,value):
+        self.ui.label_tws.setText("Порог распознавания: 1e-"+str(value))
+
     def get_menu_buttons(self):
         buttons = [
             self.ui.Button_History,
