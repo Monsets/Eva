@@ -5,15 +5,16 @@ from PyQt5 import QtWidgets
 from Application.functional_design import EvaApp
 from Application.mini_app import MiniApp
 from Application.modules import init_modules
+from Application.settingsEva import SettingsEva
 
 import os
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
     modules = init_modules('Modules')
-    mini_app = MiniApp(modules)
+    settings = SettingsEva()
+    mini_app = MiniApp(settings, modules)
     window = EvaApp(mini_app, modules)  # Создаём объект класса
-    mini_app.show()
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 

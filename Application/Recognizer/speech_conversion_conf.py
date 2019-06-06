@@ -21,8 +21,3 @@ background_config = {
     'dict': dictionary,
 }
 
-activation_config = {
-    'lm': False,
-    'keyphrase': 'eva',
-    'kws_threshold': 1e-10,
-}

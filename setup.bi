@@ -8,6 +8,10 @@ sudo apt-get install libasound2-dev
 sudo apt-get install python3-dev build-essential
 sudo apt-get install portaudio19-dev
 sudo apt-get install wmctrl
+sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
+sudo apt install gir1.2-appindicator3-0.1
+sudo apt-get install python3-gi
+
 
 python3 -m venv env
 

@@ -72,8 +72,8 @@ class EvaApp(QtWidgets.QMainWindow):
 
     def closeEvent(self, event):
         """docstring"""
-        self.mini_app.show()
-        self.mini_app.pass_info(self)
+        #self.mini_app.show()
+        #self.mini_app.pass_info(self)
         self.hide()
 
     def init_text_constants(self):

@@ -11,3 +11,5 @@ pyautogui
 xlib
 lxml
 pygame
+PyGObject
+pycairo

@@ -344,7 +344,7 @@ class Ui_MainWindow(object):
         self.label_10.setText(_translate("MainWindow", "Модуль"))
         self.label.setText(_translate("MainWindow", "Выберите микрофон"))
         self.label_2.setText(_translate("MainWindow", "Громкость микрофона"))
-        self.label_tws.setText(_translate("MainWindow", "Порог распознавания: 1e-"+SettingsEva.twsVol))
+        self.label_tws.setText(_translate("MainWindow", "Порог распознавания: 1e-"))
         self.Button_Check_Micro.setText(_translate("MainWindow", "Проверка микрофона"))
         self.label_4.setText(_translate("MainWindow", "Горячая клавиша"))
         self.label_3.setText(_translate("MainWindow", "Режим работы"))
