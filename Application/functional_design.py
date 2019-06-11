@@ -1,11 +1,8 @@
 import signal
 import os
-import pygame
-from wave import open as waveOpen
-from ossaudiodev import open as ossOpen
+import subprocess
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QHBoxLayout, QWidget, QLabel, QPushButton, QListWidgetItem, QGridLayout, QTableWidget, \
     QVBoxLayout
 from lxml import etree, objectify
@@ -176,10 +173,7 @@ class EvaApp(QtWidgets.QMainWindow):
         sounds = []
         for appt in root.getchildren():
             sounds.append(appt.getchildren()[0])
-        pygame.init()
-        pygame.mixer.music.load(str(sounds[rowId + 1]))
-        pygame.mixer.music.play()
-
+        subprocess.Popen(["aplay",str(sounds[rowId + 1])])
     """Module page events"""
 
     def init_modules_table(self):
