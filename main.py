@@ -3,7 +3,7 @@ import sys  # sys нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets
 
 from Application.functional_design import EvaApp
-from Application.mini_app import MiniApp
+from Application.mini_app import MiniApp, Indicator
 from Application.modules import init_modules
 from Application.settingsEva import SettingsEva
 
@@ -17,6 +17,7 @@ def main():
     window = EvaApp(mini_app, modules)  # Создаём объект класса
     window.show()  # Показываем окно
     mini_app.show()
+    mini_app.window = window
     app.exec_()  # и запускаем приложение
 
 

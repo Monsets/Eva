@@ -1,18 +1,13 @@
-import signal
 import gi
+import os
+import signal
+import threading
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 from gi.repository import Gtk, AppIndicator3, GLib
 from gi.repository import Notify as notify
-
-import os
-import signal
-import threading
-import time
-
 from PyQt5 import QtWidgets, QtCore, QtGui
 from pocketsphinx import LiveSpeech
-
 import Application.Recognizer.speech_conversion_conf as sc
 from Application.Recognizer.text_to_command import recognize_and_execute
 from Application.mini_app_gen_design import Ui_eva
@@ -37,10 +32,14 @@ class Indicator():
         self.indicator.set_menu(self.create_menu())
         self.call_for_recognize = False
 
-
+        self.window = None
 
     def chg_icon(self, color):
         self.indicator.set_icon_full(os.path.abspath(self.colors[color]), '')
+
+    def show_main_window(self, done):
+        if self.window != None:
+            self.window.show()
 
     def create_menu(self):
         menu = Gtk.Menu()
@@ -49,6 +48,9 @@ class Indicator():
         item_chg.connect('activate', self.stop)
         menu.append(item_chg)
 
+        item_show = Gtk.MenuItem('Show main window')
+        item_show.connect('activate', self.show_main_window)
+        menu.append(item_show)
         menu.show_all()
         return menu
 
@@ -58,12 +60,13 @@ class Indicator():
 
     def show_msg(self, msg):
         notify.init(self.app)
-        #Gtk.main()
+        # Gtk.main()
         notify.Notification.new("Result:", msg, None).show()
-        #GLib.timeout_add_seconds(2, self.quit_not)
+        # GLib.timeout_add_seconds(2, self.quit_not)
 
     def quit_not(self):
         notify.uninit()
+
 
 class MiniApp(QtWidgets.QMainWindow):
     def __init__(self, settings, modules):
@@ -80,6 +83,8 @@ class MiniApp(QtWidgets.QMainWindow):
 
         self.make_button_round()
 
+        self.window = None
+
         # save app's size for resizing
         self.standart_width = self.width()
         # get screen size to translate app to the right side
@@ -92,17 +97,14 @@ class MiniApp(QtWidgets.QMainWindow):
 
         self.build_listener()
         self.__is_working = False
-
         self.redraw()
-
-
 
     def change_active_app(self):
         '''
         Hides mini-app and shows main app
         '''
         self.hide()
-        #self.app.show()
+        # self.app.show()
 
     def pass_info(self, app):
         '''
@@ -116,6 +118,7 @@ class MiniApp(QtWidgets.QMainWindow):
         '''
         Endless loop for refreshing app. Used for handling signal of activation word.
         '''
+        self.indicator.window = self.window
         if self.indicator.call_for_recognize == True and self.__is_working == False:
             self.__is_working = True
             self.show_output0()
@@ -132,7 +135,7 @@ class MiniApp(QtWidgets.QMainWindow):
             QtGui.QRegion(self.mini_ui.Button_Recognize.rect(), QtGui.QRegion.Ellipse))
 
         template = 'background-image: url("Application/Source/Icons/{}");' + \
-                            'background-repeat: no-repeat; background-position: center;'
+                   'background-repeat: no-repeat; background-position: center;'
 
         self.blue_button = template.format('button_blue.png')
         self.yellow_button = template.format('button_yellow.png')
@@ -142,8 +145,8 @@ class MiniApp(QtWidgets.QMainWindow):
     def translate_window_to_start(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
                          self.mini_ui.Button_Recognize.width() - 100, self.height())
-        #self.mini_ui.Button_Recognize.setStyleSheet(self.blue_button)
-        #self.mini_ui.Button_Recognize.setEnabled(True)
+        # self.mini_ui.Button_Recognize.setStyleSheet(self.blue_button)
+        # self.mini_ui.Button_Recognize.setEnabled(True)
         self.indicator.chg_icon('blue')
 
     def translate_window_for_text(self):
@@ -152,11 +155,11 @@ class MiniApp(QtWidgets.QMainWindow):
 
     def set_button_to_waiting_mode(self):
         self.mini_ui.Button_Recognize.setStyleSheet(self.yellow_button)
-        #self.indicator.chg_icon('blue')
-        #self.mini_ui.Button_Recognize.setEnabled(False)
+        # self.indicator.chg_icon('blue')
+        # self.mini_ui.Button_Recognize.setEnabled(False)
 
     def set_button_to_normal_mode(self):
-        QtCore.QTimer().singleShot(2000,  self.translate_window_to_start)
+        QtCore.QTimer().singleShot(2000, self.translate_window_to_start)
 
     def show_output1(self):
         self.__is_working = True
@@ -198,7 +201,7 @@ class MiniApp(QtWidgets.QMainWindow):
         # background = LiveSpeech(**sc.background_config)
 
         """Creating an object for an activation word"""
-        activation = LiveSpeech(activation_config = {
+        activation = LiveSpeech(activation_config={
             'lm': False,
             'keyphrase': 'eva',
             'kws_threshold': self.settings.twsVol,
