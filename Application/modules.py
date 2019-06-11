@@ -51,7 +51,6 @@ class Modules():
             window_names.append(window_name)
 
         window_names.reverse()
-        print(window_names)
 
         return window_names
 

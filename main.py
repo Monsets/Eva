@@ -16,6 +16,7 @@ def main():
     mini_app = MiniApp(settings, modules)
     window = EvaApp(mini_app, modules)  # Создаём объект класса
     window.show()  # Показываем окно
+    mini_app.show()
     app.exec_()  # и запускаем приложение
 
 

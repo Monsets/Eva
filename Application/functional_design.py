@@ -71,7 +71,7 @@ class EvaApp(QtWidgets.QMainWindow):
         """docstring"""
         #self.mini_app.show()
         #self.mini_app.pass_info(self)
-        self.hide()
+        pass
 
     def init_text_constants(self):
         self.modules_path = "./Modules"

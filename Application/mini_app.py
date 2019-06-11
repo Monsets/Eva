@@ -59,7 +59,6 @@ class Indicator():
     def show_msg(self, msg):
         notify.init(self.app)
         #Gtk.main()
-        print(1)
         notify.Notification.new("Result:", msg, None).show()
         #GLib.timeout_add_seconds(2, self.quit_not)
 
@@ -142,9 +141,9 @@ class MiniApp(QtWidgets.QMainWindow):
 
     def translate_window_to_start(self):
         self.setGeometry(self.screen_size.width(), self.screen_size.height() - 200,
-                         self.mini_ui.Button_Recognize.width() + 10, self.height())
-        self.mini_ui.Button_Recognize.setStyleSheet(self.blue_button)
-        self.mini_ui.Button_Recognize.setEnabled(True)
+                         self.mini_ui.Button_Recognize.width() - 100, self.height())
+        #self.mini_ui.Button_Recognize.setStyleSheet(self.blue_button)
+        #self.mini_ui.Button_Recognize.setEnabled(True)
         self.indicator.chg_icon('blue')
 
     def translate_window_for_text(self):
@@ -153,28 +152,23 @@ class MiniApp(QtWidgets.QMainWindow):
 
     def set_button_to_waiting_mode(self):
         self.mini_ui.Button_Recognize.setStyleSheet(self.yellow_button)
-        self.indicator.chg_icon('blue')
-        self.mini_ui.Button_Recognize.setEnabled(False)
-        self.mini_ui.Button_Recognize.repaint()
+        #self.indicator.chg_icon('blue')
+        #self.mini_ui.Button_Recognize.setEnabled(False)
 
     def set_button_to_normal_mode(self):
         QtCore.QTimer().singleShot(2000,  self.translate_window_to_start)
 
     def show_output1(self):
         self.__is_working = True
-        #self.set_button_to_waiting_mode()
+        self.set_button_to_waiting_mode()
         try:
             set = SettingsEva()
             set.save_method(1)
             command = recognize_and_execute(self.modules)
-            self.mini_ui.Button_Recognize.setStyleSheet(self.green_button)
             self.indicator.chg_icon('green')
         except Exception as e:
             command = e.args[0]
-            self.mini_ui.Button_Recognize.setStyleSheet(self.red_button)
             self.indicator.chg_icon('red')
-        self.translate_window_for_text()
-        self.mini_ui.Text_RecognizedCommand.setText(command)
         self.indicator.show_msg(command)
         self.set_button_to_normal_mode()
         self.__is_working = False
@@ -186,7 +180,6 @@ class MiniApp(QtWidgets.QMainWindow):
         try:
             set = SettingsEva()
             set.save_method(0)
-            print(1)
             command = recognize_and_execute(self.modules)
             self.mini_ui.Button_Recognize.setStyleSheet(self.green_button)
             self.indicator.chg_icon('green')
